@@ -163,7 +163,19 @@ public class OptimizeOptionPageViewModel : BindableBase, INavigationAware
             return;
         }
 
-        if (feature is "startup" or "cleanup" or "network")
+        if (feature == "startup")
+        {
+            RequestNavigateFeatureRegion("StartupPrograms");
+            return;
+        }
+
+        if (feature == "network")
+        {
+            RequestNavigateFeatureRegion("NetworkDns");
+            return;
+        }
+
+        if (feature == "cleanup")
         {
             var toolkitParameters = new NavigationParameters
             {

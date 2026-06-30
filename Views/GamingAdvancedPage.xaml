@@ -9,40 +9,48 @@
              mc:Ignorable="d"
              d:DesignHeight="650"
              d:DesignWidth="900">
-    <Grid Margin="20">
+    <Grid Margin="{StaticResource AppPageMargin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="220" />
+            <RowDefinition Height="164" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="0,0,0,14">
-            <TextBlock FontSize="24" FontWeight="SemiBold" Text="游戏高级工具" />
-            <TextBlock Margin="0,6,0,0"
-                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                       Text="整合游戏相关深层设置，并提供一键性能模式。"
-                       TextWrapping="Wrap" />
-        </StackPanel>
+        <Grid Grid.Row="0" Margin="0,0,0,14">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <TextBlock Style="{StaticResource AppEyebrowTextStyle}" Text="GAMING" />
+                <TextBlock Margin="0,5,0,0" Style="{StaticResource AppPageTitleTextStyle}" Text="游戏高级工具" />
+                <TextBlock Margin="0,7,0,0" Style="{StaticResource AppBodyTextStyle}" Text="整合游戏相关深层设置，并提供一键性能模式。" />
+            </StackPanel>
+            <ui:Button Grid.Column="1" Width="124" Height="36" Margin="18,0,0,0" VerticalAlignment="Center" Appearance="Secondary" Command="{Binding RefreshStatusCommand}" Content="刷新状态" />
+        </Grid>
 
-        <ui:Card Grid.Row="1"
-                 Margin="0,0,0,14"
-                 Padding="14"
-                 Background="{StaticResource GlassPanelBrush}">
+        <Border Grid.Row="1"
+                Margin="0,0,0,14"
+                Padding="14"
+                CornerRadius="8"
+                Background="{StaticResource AppSurfaceElevatedBrush}"
+                BorderBrush="{StaticResource AppStrokeBrush}"
+                BorderThickness="1">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock VerticalAlignment="Center" Text="{Binding StatusSummary}" />
-                <ui:Button Grid.Column="1"
-                           Width="110"
-                           Margin="12,0,0,0"
-                           Appearance="Secondary"
-                           Command="{Binding RefreshStatusCommand}"
-                           Content="刷新状态" />
+                <Border Width="34" Height="34" Margin="0,0,12,0" CornerRadius="8" Background="{StaticResource AppSuccessSoftBrush}" BorderBrush="{StaticResource AppStrokeBrush}" BorderThickness="1">
+                    <ui:SymbolIcon Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource AppSuccessBrush}" Symbol="Games24" />
+                </Border>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="状态摘要" />
+                    <TextBlock Margin="0,5,0,0" FontSize="13" Text="{Binding StatusSummary}" TextWrapping="Wrap" />
+                </StackPanel>
             </Grid>
-        </ui:Card>
+        </Border>
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -50,57 +58,81 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <ui:Card Grid.Column="0" Margin="0,0,8,0" Padding="14">
-                <StackPanel>
-                    <TextBlock FontSize="17" FontWeight="SemiBold" Text="性能预设" />
-                    <TextBlock Margin="0,6,0,10"
-                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                               Text="执行游戏模式脚本，关闭虚拟化链路并偏向性能。"
-                               TextWrapping="Wrap" />
-                    <ui:Button Width="150"
-                               Appearance="Danger"
-                               Command="{Binding ApplyGamingModeCommand}"
-                               Content="应用游戏模式" />
-                </StackPanel>
-            </ui:Card>
+            <Border Grid.Column="0"
+                    Margin="0,0,7,0"
+                    Padding="14"
+                    CornerRadius="8"
+                    Background="{StaticResource AppSurfaceBrush}"
+                    BorderBrush="{StaticResource AppStrokeBrush}"
+                    BorderThickness="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                        <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="性能预设" />
+                        <TextBlock Margin="0,6,0,0" Style="{StaticResource AppBodyTextStyle}" Text="执行游戏模式脚本，关闭虚拟化链路并偏向性能。" />
+                    </StackPanel>
+                    <Border Grid.Row="1"
+                            Margin="0,14,0,14"
+                            Padding="12"
+                            CornerRadius="8"
+                            Background="#24EF4444"
+                            BorderBrush="{StaticResource AppStrokeBrush}"
+                            BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Foreground="{StaticResource AppDangerBrush}" Text="高风险操作" />
+                            <TextBlock Margin="0,6,0,0" Style="{StaticResource AppBodyTextStyle}" Text="该操作可能影响虚拟化、容器和安全特性，执行前会出现确认提示。" />
+                        </StackPanel>
+                    </Border>
+                    <ui:Button Grid.Row="2" Width="150" HorizontalAlignment="Left" Appearance="Danger" Command="{Binding ApplyGamingModeCommand}" Content="应用游戏模式" />
+                </Grid>
+            </Border>
 
-            <ui:Card Grid.Column="1" Margin="8,0,0,0" Padding="14">
+            <Border Grid.Column="1"
+                    Margin="7,0,0,0"
+                    Padding="14"
+                    CornerRadius="8"
+                    Background="{StaticResource AppSurfaceBrush}"
+                    BorderBrush="{StaticResource AppStrokeBrush}"
+                    BorderThickness="1">
                 <StackPanel>
-                    <TextBlock FontSize="17" FontWeight="SemiBold" Text="图形与游戏设置入口" />
-                    <TextBlock Margin="0,6,0,10"
-                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                               Text="快速进入 Windows 深层图形/游戏设置页面。"
-                               TextWrapping="Wrap" />
+                    <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="图形与游戏设置入口" />
+                    <TextBlock Margin="0,6,0,14" Style="{StaticResource AppBodyTextStyle}" Text="快速进入 Windows 深层图形、游戏模式和游戏栏设置页面。" />
+
                     <WrapPanel>
                         <ui:Button Width="170" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenGraphicsSettingsCommand}" Content="打开图形设置" />
                         <ui:Button Width="170" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenGameModeSettingsCommand}" Content="打开游戏模式设置" />
-                    </WrapPanel>
-                    <WrapPanel>
                         <ui:Button Width="170" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenGameBarSettingsCommand}" Content="打开游戏栏设置" />
                     </WrapPanel>
                 </StackPanel>
-            </ui:Card>
+            </Border>
         </Grid>
 
-        <ui:Card Grid.Row="3" Margin="0,14,0,0" Padding="14">
+        <Border Grid.Row="3"
+                Margin="0,14,0,0"
+                Padding="12"
+                CornerRadius="8"
+                Background="{StaticResource AppSurfaceBrush}"
+                BorderBrush="{StaticResource AppStrokeBrush}"
+                BorderThickness="1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" FontSize="15" FontWeight="SemiBold" Text="执行日志" />
-                <TextBox Grid.Row="1"
-                         Margin="0,8,0,10"
-                         Text="{Binding ExecutionLog, Mode=OneWay}"
-                         IsReadOnly="True"
-                         AcceptsReturn="True"
-                         TextWrapping="Wrap"
-                         VerticalScrollBarVisibility="Auto" />
-                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <ui:Button Width="110" Appearance="Secondary" Command="{Binding BackToHomeCommand}" Content="返回首页" />
-                </StackPanel>
+                <Grid Grid.Row="0" Margin="0,0,0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="执行日志" />
+                    <ui:Button Grid.Column="1" Width="104" Height="32" Appearance="Secondary" Command="{Binding BackToHomeCommand}" Content="返回首页" />
+                </Grid>
+                <TextBox Grid.Row="1" Style="{StaticResource AppLogTextBoxStyle}" Text="{Binding ExecutionLog, Mode=OneWay}" />
             </Grid>
-        </ui:Card>
+        </Border>
     </Grid>
 </UserControl>

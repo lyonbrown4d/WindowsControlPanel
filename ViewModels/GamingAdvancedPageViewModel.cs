@@ -7,6 +7,7 @@ namespace WindowsControlPanel.ViewModels;
 public class GamingAdvancedPageViewModel : BindableBase
 {
     private readonly ISystemControlService _systemControlService;
+    private readonly IOperationSafetyService _operationSafetyService;
     private readonly IRegionManager _regionManager;
     private string _statusSummary = string.Empty;
     private string _executionLog = string.Empty;
@@ -14,10 +15,12 @@ public class GamingAdvancedPageViewModel : BindableBase
 
     public GamingAdvancedPageViewModel(
         ISystemControlService systemControlService,
+        IOperationSafetyService operationSafetyService,
         IRegionManager regionManager
     )
     {
         _systemControlService = systemControlService;
+        _operationSafetyService = operationSafetyService;
         _regionManager = regionManager;
 
         ApplyGamingModeCommand = new DelegateCommand(async () => await ApplyGamingModeAsync(), CanRunActions);
@@ -76,6 +79,13 @@ public class GamingAdvancedPageViewModel : BindableBase
     {
         if (IsBusy)
         {
+            return;
+        }
+
+        var profile = _operationSafetyService.CreateModeProfile(OptimizationMode.Gaming, autoReboot: false);
+        if (!OperationConfirmation.Confirm(profile))
+        {
+            AppendLog($"已取消操作: {profile.Title}");
             return;
         }
 

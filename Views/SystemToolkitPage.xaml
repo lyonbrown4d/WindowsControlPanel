@@ -9,41 +9,48 @@
              mc:Ignorable="d"
              d:DesignHeight="680"
              d:DesignWidth="920">
-    <Grid Margin="20">
+    <Grid Margin="{StaticResource AppPageMargin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="220" />
+            <RowDefinition Height="164" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="0,0,0,14">
-            <TextBlock FontSize="24" FontWeight="SemiBold" Text="{Binding Title}" />
-            <TextBlock Margin="0,6,0,0"
-                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                       Text="{Binding Description}" />
-        </StackPanel>
+        <Grid Grid.Row="0" Margin="0,0,0,14">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <TextBlock Style="{StaticResource AppEyebrowTextStyle}" Text="TOOLKIT" />
+                <TextBlock Margin="0,5,0,0" Style="{StaticResource AppPageTitleTextStyle}" Text="{Binding Title}" />
+                <TextBlock Margin="0,7,0,0" Style="{StaticResource AppBodyTextStyle}" Text="{Binding Description}" />
+            </StackPanel>
+            <ui:Button Grid.Column="1" Width="124" Height="36" Margin="18,0,0,0" VerticalAlignment="Center" Appearance="Secondary" Command="{Binding RefreshStatusCommand}" Content="刷新状态" />
+        </Grid>
 
-        <ui:Card Grid.Row="1"
-                 Margin="0,0,0,14"
-                 Padding="14"
-                 Background="{StaticResource GlassPanelBrush}">
+        <Border Grid.Row="1"
+                Margin="0,0,0,14"
+                Padding="14"
+                CornerRadius="8"
+                Background="{StaticResource AppSurfaceElevatedBrush}"
+                BorderBrush="{StaticResource AppStrokeBrush}"
+                BorderThickness="1">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock VerticalAlignment="Center"
-                           Text="{Binding FeatureStateSummary}"
-                           TextWrapping="Wrap" />
-                <ui:Button Grid.Column="1"
-                           Width="110"
-                           Margin="12,0,0,0"
-                           Appearance="Secondary"
-                           Command="{Binding RefreshStatusCommand}"
-                           Content="刷新状态" />
+                <Border Width="34" Height="34" Margin="0,0,12,0" CornerRadius="8" Background="{StaticResource AppAccentSoftBrush}" BorderBrush="{StaticResource AppStrokeBrush}" BorderThickness="1">
+                    <ui:SymbolIcon Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource AppAccentBrush}" Symbol="Delete24" />
+                </Border>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="状态摘要" />
+                    <TextBlock Margin="0,5,0,0" FontSize="13" Text="{Binding FeatureStateSummary}" TextWrapping="Wrap" />
+                </StackPanel>
             </Grid>
-        </ui:Card>
+        </Border>
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -51,74 +58,88 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <ui:Card Grid.Column="0" Margin="0,0,8,0" Padding="14">
+            <Border Grid.Column="0"
+                    Margin="0,0,7,0"
+                    Padding="14"
+                    CornerRadius="8"
+                    Background="{StaticResource AppSurfaceBrush}"
+                    BorderBrush="{StaticResource AppStrokeBrush}"
+                    BorderThickness="1">
                 <StackPanel>
-                    <TextBlock FontSize="17" FontWeight="SemiBold" Text="可选功能开关" />
-                    <TextBlock Margin="0,6,0,10"
-                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                               Text="统一管理 Hyper-V / WSL / Sandbox，执行后通常需要重启。"
-                               TextWrapping="Wrap" />
+                    <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="可选功能开关" />
+                    <TextBlock Margin="0,6,0,14" Style="{StaticResource AppBodyTextStyle}" Text="统一管理 Hyper-V / WSL / Sandbox，执行后通常需要重启。" />
 
-                    <WrapPanel Margin="0,0,0,8">
-                        <ui:Button Width="110" Margin="0,0,8,8" Appearance="Primary" Command="{Binding EnableHyperVCommand}" Content="启用 Hyper-V" />
-                        <ui:Button Width="110" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding DisableHyperVCommand}" Content="禁用 Hyper-V" />
+                    <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="Hyper-V" />
+                    <WrapPanel Margin="0,8,0,12">
+                        <ui:Button Width="112" Margin="0,0,8,8" Appearance="Primary" Command="{Binding EnableHyperVCommand}" Content="启用" />
+                        <ui:Button Width="112" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding DisableHyperVCommand}" Content="禁用" />
                     </WrapPanel>
-                    <WrapPanel Margin="0,0,0,8">
-                        <ui:Button Width="110" Margin="0,0,8,8" Appearance="Primary" Command="{Binding EnableWslCommand}" Content="启用 WSL" />
-                        <ui:Button Width="110" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding DisableWslCommand}" Content="禁用 WSL" />
+
+                    <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="WSL" />
+                    <WrapPanel Margin="0,8,0,12">
+                        <ui:Button Width="112" Margin="0,0,8,8" Appearance="Primary" Command="{Binding EnableWslCommand}" Content="启用" />
+                        <ui:Button Width="112" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding DisableWslCommand}" Content="禁用" />
                     </WrapPanel>
-                    <WrapPanel>
-                        <ui:Button Width="110" Margin="0,0,8,8" Appearance="Primary" Command="{Binding EnableSandboxCommand}" Content="启用 Sandbox" />
-                        <ui:Button Width="110" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding DisableSandboxCommand}" Content="禁用 Sandbox" />
-                        <ui:Button Width="140" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenOptionalFeaturesCommand}" Content="打开功能管理器" />
+
+                    <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="Windows Sandbox" />
+                    <WrapPanel Margin="0,8,0,0">
+                        <ui:Button Width="112" Margin="0,0,8,8" Appearance="Primary" Command="{Binding EnableSandboxCommand}" Content="启用" />
+                        <ui:Button Width="112" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding DisableSandboxCommand}" Content="禁用" />
+                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenOptionalFeaturesCommand}" Content="打开功能管理器" />
                     </WrapPanel>
                 </StackPanel>
-            </ui:Card>
+            </Border>
 
-            <ui:Card Grid.Column="1" Margin="8,0,0,0" Padding="14">
+            <Border Grid.Column="1"
+                    Margin="7,0,0,0"
+                    Padding="14"
+                    CornerRadius="8"
+                    Background="{StaticResource AppSurfaceBrush}"
+                    BorderBrush="{StaticResource AppStrokeBrush}"
+                    BorderThickness="1">
                 <StackPanel>
-                    <TextBlock FontSize="17" FontWeight="SemiBold" Text="网络与维护入口" />
-                    <TextBlock Margin="0,6,0,10"
-                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                               Text="把深层设置与诊断命令整合成按钮动作。"
-                               TextWrapping="Wrap" />
+                    <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="网络与维护入口" />
+                    <TextBlock Margin="0,6,0,14" Style="{StaticResource AppBodyTextStyle}" Text="把深层设置与诊断命令整合成可回溯的按钮动作。" />
 
-                    <WrapPanel Margin="0,0,0,8">
-                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenDnsSettingsCommand}" Content="打开 DNS 高级设置" />
-                        <ui:Button Width="170" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenDeliveryOptimizationCommand}" Content="打开传递优化设置" />
+                    <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="设置入口" />
+                    <WrapPanel Margin="0,8,0,12">
+                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenDnsSettingsCommand}" Content="DNS 高级设置" />
+                        <ui:Button Width="160" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenDeliveryOptimizationCommand}" Content="传递优化设置" />
+                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenStorageSenseCommand}" Content="存储感知" />
                     </WrapPanel>
-                    <WrapPanel Margin="0,0,0,8">
-                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenStorageSenseCommand}" Content="打开存储感知" />
+
+                    <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="诊断报告" />
+                    <WrapPanel Margin="0,8,0,0">
                         <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding QueryStartupProgramsCommand}" Content="扫描启动项" />
-                    </WrapPanel>
-                    <WrapPanel>
-                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding GenerateEnergyReportCommand}" Content="生成能耗报告" />
-                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding GenerateBatteryReportCommand}" Content="生成电池报告" />
+                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding GenerateEnergyReportCommand}" Content="能耗报告" />
+                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding GenerateBatteryReportCommand}" Content="电池报告" />
                     </WrapPanel>
                 </StackPanel>
-            </ui:Card>
+            </Border>
         </Grid>
 
-        <ui:Card Grid.Row="3" Margin="0,14,0,0" Padding="14">
+        <Border Grid.Row="3"
+                Margin="0,14,0,0"
+                Padding="12"
+                CornerRadius="8"
+                Background="{StaticResource AppSurfaceBrush}"
+                BorderBrush="{StaticResource AppStrokeBrush}"
+                BorderThickness="1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-
-                <TextBlock Grid.Row="0" FontSize="15" FontWeight="SemiBold" Text="执行日志" />
-                <TextBox Grid.Row="1"
-                         Margin="0,8,0,10"
-                         Text="{Binding ExecutionLog, Mode=OneWay}"
-                         IsReadOnly="True"
-                         AcceptsReturn="True"
-                         TextWrapping="Wrap"
-                         VerticalScrollBarVisibility="Auto" />
-                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <ui:Button Width="110" Appearance="Secondary" Command="{Binding BackToHomeCommand}" Content="返回首页" />
-                </StackPanel>
+                <Grid Grid.Row="0" Margin="0,0,0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="执行日志" />
+                    <ui:Button Grid.Column="1" Width="104" Height="32" Appearance="Secondary" Command="{Binding BackToHomeCommand}" Content="返回首页" />
+                </Grid>
+                <TextBox Grid.Row="1" Style="{StaticResource AppLogTextBoxStyle}" Text="{Binding ExecutionLog, Mode=OneWay}" />
             </Grid>
-        </ui:Card>
+        </Border>
     </Grid>
 </UserControl>

@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              d:DesignHeight="620"
              d:DesignWidth="900">
-    <Grid Margin="20">
+    <Grid Margin="{StaticResource AppPageMargin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -17,97 +17,170 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="0,0,0,14">
-            <TextBlock FontSize="24" FontWeight="SemiBold" Text="安全与虚拟化" />
-            <TextBlock Margin="0,6,0,0"
-                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                       Text="统一管理 VBS、Hyper-V、WSL 相关能力。高风险操作会提示并需要管理员权限。" />
-        </StackPanel>
-
-        <ui:Card Grid.Row="1"
-                 Margin="0,0,0,14"
-                 Padding="14"
-                 Background="{StaticResource GlassPanelBrush}">
+        <Grid Grid.Row="0" Margin="0,0,0,14">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
             <StackPanel>
-                <TextBlock FontSize="15" FontWeight="SemiBold" Text="当前状态" />
-                <TextBlock Margin="0,8,0,0" Text="{Binding VbsStatus}" />
-                <TextBlock Margin="0,4,0,0" Text="{Binding VirtualizationStatus}" TextWrapping="Wrap" />
-                <TextBlock Margin="0,4,0,0" Text="{Binding AdminStatus}" />
-                <TextBlock Margin="0,4,0,0" Text="{Binding RestartHint}" />
-                <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-                    <CheckBox VerticalAlignment="Center"
-                              IsChecked="{Binding AutoRebootAfterApply}"
-                              Content="应用模式后自动重启（5 秒）" />
-                    <ui:Button Margin="12,0,0,0"
-                               Width="160"
+                <TextBlock Style="{StaticResource AppEyebrowTextStyle}" Text="SECURITY" />
+                <TextBlock Margin="0,5,0,0" Style="{StaticResource AppPageTitleTextStyle}" Text="安全与虚拟化" />
+                <TextBlock Margin="0,7,0,0"
+                           Style="{StaticResource AppBodyTextStyle}"
+                           Text="统一管理 VBS、Hyper-V、WSL 相关能力。高风险操作会先确认，并通常需要管理员权限。" />
+            </StackPanel>
+            <ui:Button Grid.Column="1"
+                       Width="124"
+                       Height="36"
+                       Margin="18,0,0,0"
+                       VerticalAlignment="Center"
+                       Appearance="Secondary"
+                       Command="{Binding RefreshCommand}"
+                       Content="刷新状态" />
+        </Grid>
+
+        <Border Grid.Row="1"
+                Margin="0,0,0,14"
+                Padding="14"
+                CornerRadius="8"
+                Background="{StaticResource AppSurfaceElevatedBrush}"
+                BorderBrush="{StaticResource AppStrokeBrush}"
+                BorderThickness="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <UniformGrid Grid.Column="0" Columns="2">
+                    <StackPanel Margin="0,0,16,0">
+                        <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="VBS" />
+                        <TextBlock Margin="0,5,0,0" FontSize="13" Text="{Binding VbsStatus}" TextWrapping="Wrap" />
+                    </StackPanel>
+                    <StackPanel Margin="0,0,16,0">
+                        <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="虚拟化" />
+                        <TextBlock Margin="0,5,0,0" FontSize="13" Text="{Binding VirtualizationStatus}" TextWrapping="Wrap" />
+                    </StackPanel>
+                    <StackPanel Margin="0,12,16,0">
+                        <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="权限" />
+                        <TextBlock Margin="0,5,0,0" FontSize="13" Text="{Binding AdminStatus}" TextWrapping="Wrap" />
+                    </StackPanel>
+                    <StackPanel Margin="0,12,16,0">
+                        <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="重启提示" />
+                        <TextBlock Margin="0,5,0,0" FontSize="13" Text="{Binding RestartHint}" TextWrapping="Wrap" />
+                    </StackPanel>
+                </UniformGrid>
+
+                <StackPanel Grid.Column="1"
+                            MinWidth="220"
+                            Margin="18,0,0,0"
+                            VerticalAlignment="Center">
+                    <CheckBox IsChecked="{Binding AutoRebootAfterApply}"
+                              Content="应用后自动重启（5 秒）" />
+                    <ui:Button Margin="0,10,0,0"
+                               Height="34"
                                Appearance="Secondary"
                                Command="{Binding RelaunchAsAdminCommand}"
                                Content="以管理员重新启动" />
                 </StackPanel>
-            </StackPanel>
-        </ui:Card>
+            </Grid>
+        </Border>
 
         <UniformGrid Grid.Row="2" Columns="2" Margin="0,0,0,14">
-            <ui:Card Margin="0,0,8,0" Padding="14">
-                <StackPanel>
-                    <TextBlock FontSize="17" FontWeight="SemiBold" Text="开发模式预设" />
-                    <TextBlock Margin="0,6,0,0" Text="启用 Hyper-V、WSL、VBS 等能力。适合开发/容器环境。" TextWrapping="Wrap" />
-                    <ui:Button Margin="0,12,0,0"
-                               Width="150"
-                               Appearance="Primary"
-                               Command="{Binding EnableDevModeCommand}"
-                               Content="应用开发模式" />
-                </StackPanel>
-            </ui:Card>
+            <Border Margin="0,0,7,0"
+                    Padding="14"
+                    CornerRadius="8"
+                    Background="{StaticResource AppSurfaceBrush}"
+                    BorderBrush="{StaticResource AppStrokeBrush}"
+                    BorderThickness="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Border Width="36"
+                            Height="36"
+                            Margin="0,0,12,0"
+                            CornerRadius="9"
+                            Background="{StaticResource AppAccentSoftBrush}"
+                            BorderBrush="{StaticResource AppStrokeBrush}"
+                            BorderThickness="1">
+                        <ui:SymbolIcon Width="19" Height="19" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource AppAccentBrush}" Symbol="Code24" />
+                    </Border>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="开发模式预设" />
+                        <TextBlock Margin="0,6,0,12" Style="{StaticResource AppBodyTextStyle}" Text="启用 Hyper-V、WSL、VBS 等能力。适合开发、容器和虚拟化环境。" />
+                        <ui:Button Width="150" HorizontalAlignment="Left" Appearance="Primary" Command="{Binding EnableDevModeCommand}" Content="应用开发模式" />
+                    </StackPanel>
+                </Grid>
+            </Border>
 
-            <ui:Card Margin="8,0,0,0" Padding="14">
-                <StackPanel>
-                    <TextBlock FontSize="17" FontWeight="SemiBold" Text="游戏模式预设" />
-                    <TextBlock Margin="0,6,0,0" Text="关闭虚拟化链路并优先兼容游戏性能。适合纯娱乐场景。" TextWrapping="Wrap" />
-                    <ui:Button Margin="0,12,0,0"
-                               Width="150"
-                               Appearance="Danger"
-                               Command="{Binding EnableGameModeCommand}"
-                               Content="应用游戏模式" />
-                </StackPanel>
-            </ui:Card>
+            <Border Margin="7,0,0,0"
+                    Padding="14"
+                    CornerRadius="8"
+                    Background="{StaticResource AppSurfaceBrush}"
+                    BorderBrush="{StaticResource AppStrokeBrush}"
+                    BorderThickness="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Border Width="36"
+                            Height="36"
+                            Margin="0,0,12,0"
+                            CornerRadius="9"
+                            Background="#24EF4444"
+                            BorderBrush="{StaticResource AppStrokeBrush}"
+                            BorderThickness="1">
+                        <ui:SymbolIcon Width="19" Height="19" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource AppDangerBrush}" Symbol="Games24" />
+                    </Border>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="游戏模式预设" />
+                        <TextBlock Margin="0,6,0,12" Style="{StaticResource AppBodyTextStyle}" Text="关闭虚拟化链路并优先兼容游戏性能。适合纯娱乐场景。" />
+                        <ui:Button Width="150" HorizontalAlignment="Left" Appearance="Danger" Command="{Binding EnableGameModeCommand}" Content="应用游戏模式" />
+                    </StackPanel>
+                </Grid>
+            </Border>
         </UniformGrid>
 
-        <ui:Card Grid.Row="3" Padding="14">
+        <Border Grid.Row="3"
+                Padding="12"
+                CornerRadius="8"
+                Background="{StaticResource AppSurfaceBrush}"
+                BorderBrush="{StaticResource AppStrokeBrush}"
+                BorderThickness="1">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="2*" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" FontSize="15" FontWeight="SemiBold" Text="执行日志" />
+                <Grid Grid.Row="0" Margin="0,0,0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="执行与审计" />
+                    <ui:Button Grid.Column="1" Width="104" Height="32" Appearance="Secondary" Command="{Binding BackToHomeCommand}" Content="返回首页" />
+                </Grid>
 
-                <TextBox Grid.Row="1"
-                         Margin="0,8,0,8"
-                         Text="{Binding ExecutionLog, Mode=OneWay}"
-                         TextWrapping="Wrap"
-                         VerticalScrollBarVisibility="Auto"
-                         IsReadOnly="True"
-                         AcceptsReturn="True" />
-
-                <TextBlock Grid.Row="2" FontSize="15" FontWeight="SemiBold" Text="最近审计" />
-
-                <TextBox Grid.Row="3"
-                         Margin="0,8,0,8"
-                         Text="{Binding AuditSummary, Mode=OneWay}"
-                         TextWrapping="Wrap"
-                         VerticalScrollBarVisibility="Auto"
-                         IsReadOnly="True"
-                         AcceptsReturn="True" />
-
-                <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <ui:Button Width="110" Margin="0,0,8,0" Appearance="Secondary" Command="{Binding RefreshCommand}" Content="刷新状态" />
-                    <ui:Button Width="110" Appearance="Secondary" Command="{Binding BackToHomeCommand}" Content="返回首页" />
-                </StackPanel>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Style="{StaticResource AppSmallLabelTextStyle}" Text="执行日志" />
+                    <TextBlock Grid.Row="0" Grid.Column="1" Margin="12,0,0,0" Style="{StaticResource AppSmallLabelTextStyle}" Text="最近审计" />
+                    <TextBox Grid.Row="1" Margin="0,7,6,0" Style="{StaticResource AppLogTextBoxStyle}" Text="{Binding ExecutionLog, Mode=OneWay}" />
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="6,7,0,0" Style="{StaticResource AppLogTextBoxStyle}" Text="{Binding AuditSummary, Mode=OneWay}" />
+                </Grid>
             </Grid>
-        </ui:Card>
+        </Border>
     </Grid>
 </UserControl>

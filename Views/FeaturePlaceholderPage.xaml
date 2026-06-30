@@ -9,18 +9,47 @@
              mc:Ignorable="d"
              d:DesignHeight="600"
              d:DesignWidth="720">
-    <Grid>
-        <ui:Card Margin="10" Padding="18">
-            <StackPanel>
-                <TextBlock FontSize="24" FontWeight="SemiBold" Text="{Binding Title}" />
-                <TextBlock Margin="0,10,0,0"
-                           TextWrapping="Wrap"
-                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                           Text="{Binding Description}" />
-                <TextBlock Margin="0,18,0,0"
-                           Text="当前为页面骨架。后续可接入脚本执行、状态检测和日志回显。"
-                           Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
-            </StackPanel>
-        </ui:Card>
+    <Grid Margin="{StaticResource AppPageMargin}">
+        <Border Padding="18"
+                CornerRadius="8"
+                Background="{StaticResource AppSurfaceBrush}"
+                BorderBrush="{StaticResource AppStrokeBrush}"
+                BorderThickness="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0">
+                    <TextBlock Style="{StaticResource AppEyebrowTextStyle}" Text="MODULE" />
+                    <TextBlock Margin="0,5,0,0" Style="{StaticResource AppPageTitleTextStyle}" Text="{Binding Title}" />
+                    <TextBlock Margin="0,7,0,0" Style="{StaticResource AppBodyTextStyle}" Text="{Binding Description}" />
+                </StackPanel>
+
+                <Border Grid.Row="1"
+                        Margin="0,18,0,0"
+                        Padding="16"
+                        VerticalAlignment="Top"
+                        CornerRadius="8"
+                        Background="{StaticResource AppSurfaceElevatedBrush}"
+                        BorderBrush="{StaticResource AppStrokeBrush}"
+                        BorderThickness="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border Width="36" Height="36" Margin="0,0,12,0" CornerRadius="9" Background="{StaticResource AppAccentSoftBrush}" BorderBrush="{StaticResource AppStrokeBrush}" BorderThickness="1">
+                            <ui:SymbolIcon Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource AppAccentBrush}" Symbol="Settings24" />
+                        </Border>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="页面骨架已就绪" />
+                            <TextBlock Margin="0,6,0,0" Style="{StaticResource AppBodyTextStyle}" Text="后续可接入脚本执行、状态检测、确认流程和日志回显。" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

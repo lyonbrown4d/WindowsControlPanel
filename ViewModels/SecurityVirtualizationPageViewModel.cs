@@ -8,6 +8,7 @@ namespace WindowsControlPanel.ViewModels;
 public class SecurityVirtualizationPageViewModel : BindableBase
 {
     private readonly ISystemControlService _systemControlService;
+    private readonly IOperationSafetyService _operationSafetyService;
     private readonly IRegionManager _regionManager;
     private string _vbsStatus = string.Empty;
     private string _virtualizationStatus = string.Empty;
@@ -21,9 +22,11 @@ public class SecurityVirtualizationPageViewModel : BindableBase
 
     public SecurityVirtualizationPageViewModel(
         ISystemControlService systemControlService,
+        IOperationSafetyService operationSafetyService,
         IRegionManager regionManager)
     {
         _systemControlService = systemControlService;
+        _operationSafetyService = operationSafetyService;
         _regionManager = regionManager;
 
         EnableDevModeCommand = new DelegateCommand(
@@ -112,6 +115,13 @@ public class SecurityVirtualizationPageViewModel : BindableBase
     {
         if (IsBusy)
         {
+            return;
+        }
+
+        var profile = _operationSafetyService.CreateModeProfile(mode, AutoRebootAfterApply);
+        if (!OperationConfirmation.Confirm(profile))
+        {
+            AppendLog($"已取消操作: {profile.Title}");
             return;
         }
 

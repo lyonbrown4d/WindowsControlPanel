@@ -21,6 +21,9 @@ public partial class App : PrismApplication
     {
         base.OnInitialized();
         var logger = Container.Resolve<Serilog.ILogger>();
+        var themeSettingsService = Container.Resolve<IThemeSettingsService>();
+        var themePreference = themeSettingsService.GetThemePreferenceAsync().GetAwaiter().GetResult();
+        themeSettingsService.ApplyTheme(themePreference, Current.MainWindow);
         var regionManager = Container.Resolve<IRegionManager>();
         logger.Information("Application initialized. Navigating ContentRegion -> Dashboard.");
         regionManager.RequestNavigate("ContentRegion", "Dashboard", result =>
@@ -45,12 +48,18 @@ public partial class App : PrismApplication
         containerRegistry.RegisterForNavigation<OptimizeOptionPage>("OptimizeOption");
         containerRegistry.RegisterForNavigation<SecurityVirtualizationPage>("SecurityVirtualization");
         containerRegistry.RegisterForNavigation<SystemToolkitPage>("SystemToolkit");
+        containerRegistry.RegisterForNavigation<StartupProgramsPage>("StartupPrograms");
+        containerRegistry.RegisterForNavigation<NetworkDnsPage>("NetworkDns");
         containerRegistry.RegisterForNavigation<DevelopmentAdvancedPage>("DevelopmentAdvanced");
         containerRegistry.RegisterForNavigation<GamingAdvancedPage>("GamingAdvanced");
         containerRegistry.RegisterForNavigation<FeaturePlaceholderPage>("FeaturePlaceholder");
 
         containerRegistry.RegisterSingleton<ISystemInfoService, SystemInfoService>();
         containerRegistry.RegisterSingleton<ISystemControlService, SystemControlService>();
+        containerRegistry.RegisterSingleton<IStartupProgramService, StartupProgramService>();
+        containerRegistry.RegisterSingleton<INetworkStatusService, NetworkStatusService>();
+        containerRegistry.RegisterSingleton<IOperationSafetyService, OperationSafetyService>();
+        containerRegistry.RegisterSingleton<IThemeSettingsService, ThemeSettingsService>();
 
         containerRegistry.RegisterSingleton<AppDbContext>(() =>
         {

@@ -1,6 +1,7 @@
-using Wpf.Ui.Controls;
+using System;
 using System.Windows;
 using System.Windows.Input;
+using Wpf.Ui.Controls;
 
 namespace WindowsControlPanel;
 
@@ -19,7 +20,19 @@ public partial class MainWindow : FluentWindow
             return;
         }
 
-        DragMove();
+        if (e.LeftButton != MouseButtonState.Pressed)
+        {
+            return;
+        }
+
+        try
+        {
+            DragMove();
+        }
+        catch (InvalidOperationException)
+        {
+            // Custom chrome can receive edge-case mouse messages while the window state changes.
+        }
     }
 
     private void MinimizeButton_OnClick(object sender, RoutedEventArgs e)

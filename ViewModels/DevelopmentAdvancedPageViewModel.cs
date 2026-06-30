@@ -7,6 +7,7 @@ namespace WindowsControlPanel.ViewModels;
 public class DevelopmentAdvancedPageViewModel : BindableBase
 {
     private readonly ISystemControlService _systemControlService;
+    private readonly IOperationSafetyService _operationSafetyService;
     private readonly IRegionManager _regionManager;
     private string _statusSummary = string.Empty;
     private string _executionLog = string.Empty;
@@ -14,10 +15,12 @@ public class DevelopmentAdvancedPageViewModel : BindableBase
 
     public DevelopmentAdvancedPageViewModel(
         ISystemControlService systemControlService,
+        IOperationSafetyService operationSafetyService,
         IRegionManager regionManager
     )
     {
         _systemControlService = systemControlService;
+        _operationSafetyService = operationSafetyService;
         _regionManager = regionManager;
 
         EnableDeveloperModeCommand = new DelegateCommand(
@@ -84,6 +87,13 @@ public class DevelopmentAdvancedPageViewModel : BindableBase
     {
         if (IsBusy)
         {
+            return;
+        }
+
+        var profile = _operationSafetyService.CreateAdvancedActionProfile(action);
+        if (!OperationConfirmation.Confirm(profile))
+        {
+            AppendLog($"已取消操作: {profile.Title}");
             return;
         }
 

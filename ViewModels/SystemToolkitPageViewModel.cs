@@ -7,6 +7,7 @@ namespace WindowsControlPanel.ViewModels;
 public class SystemToolkitPageViewModel : BindableBase, INavigationAware
 {
     private readonly ISystemControlService _systemControlService;
+    private readonly IOperationSafetyService _operationSafetyService;
     private readonly IRegionManager _regionManager;
     private string _title = "系统维护工具箱";
     private string _description = "集中访问可选功能、网络与维护入口。";
@@ -16,10 +17,12 @@ public class SystemToolkitPageViewModel : BindableBase, INavigationAware
 
     public SystemToolkitPageViewModel(
         ISystemControlService systemControlService,
+        IOperationSafetyService operationSafetyService,
         IRegionManager regionManager
     )
     {
         _systemControlService = systemControlService;
+        _operationSafetyService = operationSafetyService;
         _regionManager = regionManager;
 
         EnableHyperVCommand = new DelegateCommand(
@@ -149,6 +152,13 @@ public class SystemToolkitPageViewModel : BindableBase, INavigationAware
     {
         if (IsBusy)
         {
+            return;
+        }
+
+        var profile = _operationSafetyService.CreateOptionalFeatureProfile(featureName, enable);
+        if (!OperationConfirmation.Confirm(profile))
+        {
+            AppendLog($"已取消操作: {profile.Title}");
             return;
         }
 

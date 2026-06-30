@@ -10,67 +10,85 @@
              mc:Ignorable="d"
              d:DesignHeight="650"
              d:DesignWidth="980">
-    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-          Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+    <Grid Background="Transparent">
         <Grid.Resources>
             <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
 
             <Style x:Key="SidebarButtonStyle" TargetType="ui:Button">
-                <Setter Property="Height" Value="38" />
+                <Setter Property="Height" Value="42" />
                 <Setter Property="Appearance" Value="Secondary" />
                 <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="HorizontalContentAlignment" Value="Left" />
+                <Setter Property="Padding" Value="12,0" />
                 <Setter Property="BorderThickness" Value="1" />
-                <Setter Property="BorderBrush" Value="{StaticResource GlassStrokeBrush}" />
-                <Setter Property="Background" Value="{StaticResource GlassPanelBrush}" />
-            </Style>
-
-            <Style x:Key="SidebarButtonSelectedStyle" TargetType="ui:Button" BasedOn="{StaticResource SidebarButtonStyle}">
-                <Setter Property="FontWeight" Value="SemiBold" />
-                <Setter Property="BorderThickness" Value="1.5" />
-                <Setter Property="BorderBrush" Value="{DynamicResource SystemFillColorPrimaryBrush}" />
-                <Setter Property="Background" Value="{StaticResource GlassSidebarBrush}" />
+                <Setter Property="BorderBrush" Value="{StaticResource AppStrokeBrush}" />
+                <Setter Property="Background" Value="{StaticResource AppSurfaceElevatedBrush}" />
             </Style>
         </Grid.Resources>
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="240" />
+            <ColumnDefinition Width="276" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <Border Grid.Column="0"
-                Background="{StaticResource GlassSidebarBrush}"
-                VerticalAlignment="Stretch"
-                HorizontalAlignment="Stretch">
-            <Grid Margin="12,16">
+                Background="{StaticResource AppSurfaceBrush}"
+                BorderBrush="{StaticResource AppStrokeBrush}"
+                BorderThickness="0,0,1,0">
+            <Grid Margin="16,18,16,14">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0">
-                    <TextBlock FontSize="20" FontWeight="SemiBold" Text="进一步优化" />
-                    <TextBlock Margin="0,6,0,0"
-                               TextWrapping="Wrap"
-                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                               Text="{Binding GlobalStatus}" />
+                    <TextBlock Style="{StaticResource AppEyebrowTextStyle}" Text="OPTIMIZE" />
+                    <TextBlock Margin="0,5,0,0" Style="{StaticResource AppPageTitleTextStyle}" Text="进一步优化" />
+                    <TextBlock Margin="0,7,0,0"
+                               Style="{StaticResource AppBodyTextStyle}"
+                               Text="集中处理安全、开发、游戏、启动项、磁盘和网络相关的高级控制。" />
                 </StackPanel>
 
-                <StackPanel Grid.Row="1" Margin="0,14,0,0">
-                    <Grid Margin="0,0,0,10">
+                <Border Grid.Row="1"
+                        Margin="0,16,0,18"
+                        Padding="12"
+                        CornerRadius="8"
+                        Background="{StaticResource AppSurfaceElevatedBrush}"
+                        BorderBrush="{StaticResource AppStrokeBrush}"
+                        BorderThickness="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border Width="8"
+                                Height="8"
+                                Margin="0,4,10,0"
+                                CornerRadius="4"
+                                Background="{StaticResource AppSuccessBrush}" />
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="当前工作区" />
+                            <TextBlock Margin="0,5,0,0"
+                                       FontSize="12"
+                                       LineHeight="18"
+                                       Text="{Binding GlobalStatus}"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <StackPanel Grid.Row="2">
+                    <TextBlock Margin="0,0,0,9" Style="{StaticResource AppSmallLabelTextStyle}" Text="模块" />
+
+                    <Grid Margin="0,0,0,9">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="4" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0"
-                                CornerRadius="2"
-                                Background="{DynamicResource SystemFillColorPrimaryBrush}"
-                                Visibility="{Binding IsSecuritySelected, Converter={StaticResource BoolToVisibility}}" />
-                        <ui:Button Grid.Column="1"
-                                   Command="{Binding OpenSecurityCommand}"
-                                   Content="安全与虚拟化">
+                        <Border Grid.Column="0" CornerRadius="2" Background="{StaticResource AppAccentBrush}" Visibility="{Binding IsSecuritySelected, Converter={StaticResource BoolToVisibility}}" />
+                        <ui:Button Grid.Column="1" Command="{Binding OpenSecurityCommand}" Content="安全与虚拟化">
                             <ui:Button.Icon>
                                 <ui:SymbolIcon Symbol="ShieldLock24" />
                             </ui:Button.Icon>
@@ -79,9 +97,8 @@
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsSecuritySelected}" Value="True">
                                             <Setter Property="FontWeight" Value="SemiBold" />
-                                            <Setter Property="BorderThickness" Value="1.5" />
-                                            <Setter Property="BorderBrush" Value="{DynamicResource SystemFillColorPrimaryBrush}" />
-                                            <Setter Property="Background" Value="{StaticResource GlassSidebarBrush}" />
+                                            <Setter Property="BorderBrush" Value="{StaticResource AppAccentBrush}" />
+                                            <Setter Property="Background" Value="{StaticResource AppAccentSoftBrush}" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -89,18 +106,13 @@
                         </ui:Button>
                     </Grid>
 
-                    <Grid Margin="0,0,0,10">
+                    <Grid Margin="0,0,0,9">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="4" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0"
-                                CornerRadius="2"
-                                Background="{DynamicResource SystemFillColorPrimaryBrush}"
-                                Visibility="{Binding IsDevelopmentSelected, Converter={StaticResource BoolToVisibility}}" />
-                        <ui:Button Grid.Column="1"
-                                   Command="{Binding OpenDevelopmentCommand}"
-                                   Content="开发环境">
+                        <Border Grid.Column="0" CornerRadius="2" Background="{StaticResource AppAccentBrush}" Visibility="{Binding IsDevelopmentSelected, Converter={StaticResource BoolToVisibility}}" />
+                        <ui:Button Grid.Column="1" Command="{Binding OpenDevelopmentCommand}" Content="开发环境">
                             <ui:Button.Icon>
                                 <ui:SymbolIcon Symbol="Code24" />
                             </ui:Button.Icon>
@@ -109,9 +121,8 @@
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsDevelopmentSelected}" Value="True">
                                             <Setter Property="FontWeight" Value="SemiBold" />
-                                            <Setter Property="BorderThickness" Value="1.5" />
-                                            <Setter Property="BorderBrush" Value="{DynamicResource SystemFillColorPrimaryBrush}" />
-                                            <Setter Property="Background" Value="{StaticResource GlassSidebarBrush}" />
+                                            <Setter Property="BorderBrush" Value="{StaticResource AppAccentBrush}" />
+                                            <Setter Property="Background" Value="{StaticResource AppAccentSoftBrush}" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -119,29 +130,23 @@
                         </ui:Button>
                     </Grid>
 
-                    <Grid Margin="0,0,0,10">
+                    <Grid Margin="0,0,0,9">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="4" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0"
-                                CornerRadius="2"
-                                Background="{DynamicResource SystemFillColorPrimaryBrush}"
-                                Visibility="{Binding IsGameSelected, Converter={StaticResource BoolToVisibility}}" />
-                        <ui:Button Grid.Column="1"
-                                   Command="{Binding OpenGameCommand}"
-                                   Content="游戏优化">
+                        <Border Grid.Column="0" CornerRadius="2" Background="{StaticResource AppAccentBrush}" Visibility="{Binding IsGameSelected, Converter={StaticResource BoolToVisibility}}" />
+                        <ui:Button Grid.Column="1" Command="{Binding OpenGameCommand}" Content="游戏优化">
                             <ui:Button.Icon>
-                                <ui:SymbolIcon />
+                                <ui:SymbolIcon Symbol="Games24" />
                             </ui:Button.Icon>
                             <ui:Button.Style>
                                 <Style TargetType="ui:Button" BasedOn="{StaticResource SidebarButtonStyle}">
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsGameSelected}" Value="True">
                                             <Setter Property="FontWeight" Value="SemiBold" />
-                                            <Setter Property="BorderThickness" Value="1.5" />
-                                            <Setter Property="BorderBrush" Value="{DynamicResource SystemFillColorPrimaryBrush}" />
-                                            <Setter Property="Background" Value="{StaticResource GlassSidebarBrush}" />
+                                            <Setter Property="BorderBrush" Value="{StaticResource AppAccentBrush}" />
+                                            <Setter Property="Background" Value="{StaticResource AppAccentSoftBrush}" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -149,18 +154,13 @@
                         </ui:Button>
                     </Grid>
 
-                    <Grid Margin="0,0,0,10">
+                    <Grid Margin="0,0,0,9">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="4" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0"
-                                CornerRadius="2"
-                                Background="{DynamicResource SystemFillColorPrimaryBrush}"
-                                Visibility="{Binding IsStartupSelected, Converter={StaticResource BoolToVisibility}}" />
-                        <ui:Button Grid.Column="1"
-                                   Command="{Binding OpenStartupCommand}"
-                                   Content="启动与服务">
+                        <Border Grid.Column="0" CornerRadius="2" Background="{StaticResource AppAccentBrush}" Visibility="{Binding IsStartupSelected, Converter={StaticResource BoolToVisibility}}" />
+                        <ui:Button Grid.Column="1" Command="{Binding OpenStartupCommand}" Content="启动与服务">
                             <ui:Button.Icon>
                                 <ui:SymbolIcon Symbol="Rocket24" />
                             </ui:Button.Icon>
@@ -169,9 +169,8 @@
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsStartupSelected}" Value="True">
                                             <Setter Property="FontWeight" Value="SemiBold" />
-                                            <Setter Property="BorderThickness" Value="1.5" />
-                                            <Setter Property="BorderBrush" Value="{DynamicResource SystemFillColorPrimaryBrush}" />
-                                            <Setter Property="Background" Value="{StaticResource GlassSidebarBrush}" />
+                                            <Setter Property="BorderBrush" Value="{StaticResource AppAccentBrush}" />
+                                            <Setter Property="Background" Value="{StaticResource AppAccentSoftBrush}" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -179,18 +178,13 @@
                         </ui:Button>
                     </Grid>
 
-                    <Grid Margin="0,0,0,10">
+                    <Grid Margin="0,0,0,9">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="4" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0"
-                                CornerRadius="2"
-                                Background="{DynamicResource SystemFillColorPrimaryBrush}"
-                                Visibility="{Binding IsCleanupSelected, Converter={StaticResource BoolToVisibility}}" />
-                        <ui:Button Grid.Column="1"
-                                   Command="{Binding OpenCleanupCommand}"
-                                   Content="磁盘与清理">
+                        <Border Grid.Column="0" CornerRadius="2" Background="{StaticResource AppAccentBrush}" Visibility="{Binding IsCleanupSelected, Converter={StaticResource BoolToVisibility}}" />
+                        <ui:Button Grid.Column="1" Command="{Binding OpenCleanupCommand}" Content="磁盘与清理">
                             <ui:Button.Icon>
                                 <ui:SymbolIcon Symbol="Delete24" />
                             </ui:Button.Icon>
@@ -199,9 +193,8 @@
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsCleanupSelected}" Value="True">
                                             <Setter Property="FontWeight" Value="SemiBold" />
-                                            <Setter Property="BorderThickness" Value="1.5" />
-                                            <Setter Property="BorderBrush" Value="{DynamicResource SystemFillColorPrimaryBrush}" />
-                                            <Setter Property="Background" Value="{StaticResource GlassSidebarBrush}" />
+                                            <Setter Property="BorderBrush" Value="{StaticResource AppAccentBrush}" />
+                                            <Setter Property="Background" Value="{StaticResource AppAccentSoftBrush}" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -214,13 +207,8 @@
                             <ColumnDefinition Width="4" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0"
-                                CornerRadius="2"
-                                Background="{DynamicResource SystemFillColorPrimaryBrush}"
-                                Visibility="{Binding IsNetworkSelected, Converter={StaticResource BoolToVisibility}}" />
-                        <ui:Button Grid.Column="1"
-                                   Command="{Binding OpenNetworkCommand}"
-                                   Content="网络与 DNS">
+                        <Border Grid.Column="0" CornerRadius="2" Background="{StaticResource AppAccentBrush}" Visibility="{Binding IsNetworkSelected, Converter={StaticResource BoolToVisibility}}" />
+                        <ui:Button Grid.Column="1" Command="{Binding OpenNetworkCommand}" Content="网络与 DNS">
                             <ui:Button.Icon>
                                 <ui:SymbolIcon Symbol="Globe24" />
                             </ui:Button.Icon>
@@ -229,9 +217,8 @@
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsNetworkSelected}" Value="True">
                                             <Setter Property="FontWeight" Value="SemiBold" />
-                                            <Setter Property="BorderThickness" Value="1.5" />
-                                            <Setter Property="BorderBrush" Value="{DynamicResource SystemFillColorPrimaryBrush}" />
-                                            <Setter Property="Background" Value="{StaticResource GlassSidebarBrush}" />
+                                            <Setter Property="BorderBrush" Value="{StaticResource AppAccentBrush}" />
+                                            <Setter Property="Background" Value="{StaticResource AppAccentSoftBrush}" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -240,7 +227,15 @@
                     </Grid>
                 </StackPanel>
 
-                <StackPanel Grid.Row="2">
+                <StackPanel Grid.Row="3">
+                    <Border Margin="0,0,0,10"
+                            Padding="10"
+                            CornerRadius="8"
+                            Background="{StaticResource AppSurfaceSubtleBrush}"
+                            BorderBrush="{StaticResource AppStrokeBrush}"
+                            BorderThickness="1">
+                        <TextBlock Style="{StaticResource AppBodyTextStyle}" Text="高风险操作会先确认；需要管理员权限的动作会明确提示。" />
+                    </Border>
                     <ui:Button Height="36"
                                Appearance="Secondary"
                                Command="{Binding BackToHomeCommand}"
@@ -253,18 +248,16 @@
             </Grid>
         </Border>
 
-        <ui:Card Grid.Column="1"
-                 Margin="12"
-                 Padding="14"
-                 BorderThickness="1"
-                 Background="{StaticResource GlassPanelBrush}"
-                 BorderBrush="{StaticResource GlassStrokeBrush}"
-                 VerticalAlignment="Stretch"
-                 HorizontalAlignment="Stretch">
-            <ContentControl
-                regions:RegionManager.RegionName="FeatureRegion"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch" />
-        </ui:Card>
+        <Border Grid.Column="1"
+                Margin="14"
+                Background="{StaticResource AppSurfaceSubtleBrush}"
+                BorderBrush="{StaticResource AppStrokeBrush}"
+                BorderThickness="1"
+                CornerRadius="10"
+                ClipToBounds="True">
+            <ContentControl regions:RegionManager.RegionName="FeatureRegion"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch" />
+        </Border>
     </Grid>
 </UserControl>

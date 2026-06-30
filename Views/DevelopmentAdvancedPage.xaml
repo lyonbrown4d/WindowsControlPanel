@@ -9,40 +9,48 @@
              mc:Ignorable="d"
              d:DesignHeight="650"
              d:DesignWidth="900">
-    <Grid Margin="20">
+    <Grid Margin="{StaticResource AppPageMargin}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="220" />
+            <RowDefinition Height="164" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="0,0,0,14">
-            <TextBlock FontSize="24" FontWeight="SemiBold" Text="开发高级工具" />
-            <TextBlock Margin="0,6,0,0"
-                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                       Text="封装开发者模式、Sudo、包清单导出等深层动作。"
-                       TextWrapping="Wrap" />
-        </StackPanel>
+        <Grid Grid.Row="0" Margin="0,0,0,14">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <TextBlock Style="{StaticResource AppEyebrowTextStyle}" Text="DEVELOPER" />
+                <TextBlock Margin="0,5,0,0" Style="{StaticResource AppPageTitleTextStyle}" Text="开发高级工具" />
+                <TextBlock Margin="0,7,0,0" Style="{StaticResource AppBodyTextStyle}" Text="封装开发者模式、Windows Sudo、包清单导出等深层动作。" />
+            </StackPanel>
+            <ui:Button Grid.Column="1" Width="124" Height="36" Margin="18,0,0,0" VerticalAlignment="Center" Appearance="Secondary" Command="{Binding RefreshStatusCommand}" Content="刷新状态" />
+        </Grid>
 
-        <ui:Card Grid.Row="1"
-                 Margin="0,0,0,14"
-                 Padding="14"
-                 Background="{StaticResource GlassPanelBrush}">
+        <Border Grid.Row="1"
+                Margin="0,0,0,14"
+                Padding="14"
+                CornerRadius="8"
+                Background="{StaticResource AppSurfaceElevatedBrush}"
+                BorderBrush="{StaticResource AppStrokeBrush}"
+                BorderThickness="1">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock VerticalAlignment="Center" Text="{Binding StatusSummary}" />
-                <ui:Button Grid.Column="1"
-                           Width="110"
-                           Margin="12,0,0,0"
-                           Appearance="Secondary"
-                           Command="{Binding RefreshStatusCommand}"
-                           Content="刷新状态" />
+                <Border Width="34" Height="34" Margin="0,0,12,0" CornerRadius="8" Background="{StaticResource AppAccentSoftBrush}" BorderBrush="{StaticResource AppStrokeBrush}" BorderThickness="1">
+                    <ui:SymbolIcon Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource AppAccentBrush}" Symbol="Code24" />
+                </Border>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="状态摘要" />
+                    <TextBlock Margin="0,5,0,0" FontSize="13" Text="{Binding StatusSummary}" TextWrapping="Wrap" />
+                </StackPanel>
             </Grid>
-        </ui:Card>
+        </Border>
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -50,58 +58,87 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <ui:Card Grid.Column="0" Margin="0,0,8,0" Padding="14">
+            <Border Grid.Column="0"
+                    Margin="0,0,7,0"
+                    Padding="14"
+                    CornerRadius="8"
+                    Background="{StaticResource AppSurfaceBrush}"
+                    BorderBrush="{StaticResource AppStrokeBrush}"
+                    BorderThickness="1">
                 <StackPanel>
-                    <TextBlock FontSize="17" FontWeight="SemiBold" Text="开发系统能力" />
-                    <TextBlock Margin="0,6,0,10"
-                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                               Text="写注册表修改开发者模式，需要管理员权限。"
-                               TextWrapping="Wrap" />
-                    <WrapPanel>
-                        <ui:Button Width="140" Margin="0,0,8,8" Appearance="Primary" Command="{Binding EnableDeveloperModeCommand}" Content="启用开发者模式" />
-                        <ui:Button Width="140" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding DisableDeveloperModeCommand}" Content="禁用开发者模式" />
-                    </WrapPanel>
-                    <WrapPanel>
-                        <ui:Button Width="140" Margin="0,0,8,8" Appearance="Primary" Command="{Binding EnableSudoCommand}" Content="启用 Windows Sudo" />
-                        <ui:Button Width="140" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding DisableSudoCommand}" Content="禁用 Windows Sudo" />
-                    </WrapPanel>
-                </StackPanel>
-            </ui:Card>
+                    <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="开发系统能力" />
+                    <TextBlock Margin="0,6,0,14" Style="{StaticResource AppBodyTextStyle}" Text="写注册表修改开发者模式和 Sudo，需要管理员权限。" />
 
-            <ui:Card Grid.Column="1" Margin="8,0,0,0" Padding="14">
-                <StackPanel>
-                    <TextBlock FontSize="17" FontWeight="SemiBold" Text="开发环境迁移" />
-                    <TextBlock Margin="0,6,0,10"
-                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                               Text="导出 winget 包清单，便于重装系统后恢复开发环境。"
-                               TextWrapping="Wrap" />
-                    <ui:Button Width="170"
-                               Appearance="Secondary"
-                               Command="{Binding ExportWingetCommand}"
-                               Content="导出 winget 清单" />
+                    <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="开发者模式" />
+                    <WrapPanel Margin="0,8,0,14">
+                        <ui:Button Width="142" Margin="0,0,8,8" Appearance="Primary" Command="{Binding EnableDeveloperModeCommand}" Content="启用开发者模式" />
+                        <ui:Button Width="142" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding DisableDeveloperModeCommand}" Content="禁用开发者模式" />
+                    </WrapPanel>
+
+                    <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="Windows Sudo" />
+                    <WrapPanel Margin="0,8,0,0">
+                        <ui:Button Width="142" Margin="0,0,8,8" Appearance="Primary" Command="{Binding EnableSudoCommand}" Content="启用 Sudo" />
+                        <ui:Button Width="142" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding DisableSudoCommand}" Content="禁用 Sudo" />
+                    </WrapPanel>
                 </StackPanel>
-            </ui:Card>
+            </Border>
+
+            <Border Grid.Column="1"
+                    Margin="7,0,0,0"
+                    Padding="14"
+                    CornerRadius="8"
+                    Background="{StaticResource AppSurfaceBrush}"
+                    BorderBrush="{StaticResource AppStrokeBrush}"
+                    BorderThickness="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                        <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="开发环境迁移" />
+                        <TextBlock Margin="0,6,0,0" Style="{StaticResource AppBodyTextStyle}" Text="导出 winget 包清单，便于重装系统后恢复开发环境。" />
+                    </StackPanel>
+                    <Border Grid.Row="1"
+                            Margin="0,14,0,14"
+                            Padding="12"
+                            CornerRadius="8"
+                            Background="{StaticResource AppSurfaceElevatedBrush}"
+                            BorderBrush="{StaticResource AppStrokeBrush}"
+                            BorderThickness="1">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="导出内容" />
+                            <TextBlock Margin="0,6,0,0" Style="{StaticResource AppBodyTextStyle}" Text="当前用户安装的 winget 软件包、来源和版本信息。" />
+                        </StackPanel>
+                    </Border>
+                    <ui:Button Grid.Row="2" Width="170" HorizontalAlignment="Left" Appearance="Secondary" Command="{Binding ExportWingetCommand}" Content="导出 winget 清单" />
+                </Grid>
+            </Border>
         </Grid>
 
-        <ui:Card Grid.Row="3" Margin="0,14,0,0" Padding="14">
+        <Border Grid.Row="3"
+                Margin="0,14,0,0"
+                Padding="12"
+                CornerRadius="8"
+                Background="{StaticResource AppSurfaceBrush}"
+                BorderBrush="{StaticResource AppStrokeBrush}"
+                BorderThickness="1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" FontSize="15" FontWeight="SemiBold" Text="执行日志" />
-                <TextBox Grid.Row="1"
-                         Margin="0,8,0,10"
-                         Text="{Binding ExecutionLog, Mode=OneWay}"
-                         IsReadOnly="True"
-                         AcceptsReturn="True"
-                         TextWrapping="Wrap"
-                         VerticalScrollBarVisibility="Auto" />
-                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <ui:Button Width="110" Appearance="Secondary" Command="{Binding BackToHomeCommand}" Content="返回首页" />
-                </StackPanel>
+                <Grid Grid.Row="0" Margin="0,0,0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="执行日志" />
+                    <ui:Button Grid.Column="1" Width="104" Height="32" Appearance="Secondary" Command="{Binding BackToHomeCommand}" Content="返回首页" />
+                </Grid>
+                <TextBox Grid.Row="1" Style="{StaticResource AppLogTextBoxStyle}" Text="{Binding ExecutionLog, Mode=OneWay}" />
             </Grid>
-        </ui:Card>
+        </Border>
     </Grid>
 </UserControl>
