@@ -10,22 +10,23 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="FluentIcons.Common" Version="1.1.312" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.10" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.10">
+      <PackageReference Include="FluentIcons.Common" Version="2.1.331" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.17" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.17">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
       <PackageReference Include="NVAPI" Version="1.0.440" />
       <PackageReference Include="Prism.Unity" Version="9.0.537" />
       <PackageReference Include="Prism.Wpf" Version="9.0.537" />
-      <PackageReference Include="Serilog" Version="4.3.1-dev-02387" />
-      <PackageReference Include="Serilog.Extensions.Logging" Version="9.0.3-dev-02320" />
-      <PackageReference Include="Serilog.Sinks.Console" Version="6.0.1-dev-00953" />
+      <PackageReference Include="Serilog" Version="4.3.1" />
+      <PackageReference Include="Serilog.Extensions.Logging" Version="10.0.0" />
+      <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
       <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
-      <PackageReference Include="Serilog.Sinks.SQLite" Version="6.0.0" />
-      <PackageReference Include="System.Management" Version="10.0.0-rc.1.25451.107" />
-      <PackageReference Include="WPF-UI" Version="4.0.3" />
+      <PackageReference Include="Serilog.Sinks.SQLite" Version="7.0.0" />
+      <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.3" />
+      <PackageReference Include="System.Management" Version="10.0.9" />
+      <PackageReference Include="WPF-UI" Version="4.3.0" />
     </ItemGroup>
 
     <ItemGroup>

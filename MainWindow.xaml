@@ -10,7 +10,7 @@
     Height="780"
     MinWidth="1040"
     MinHeight="660"
-    Background="{StaticResource AppBackgroundBrush}"
+    Background="Transparent"
     ResizeMode="CanResize"
     WindowBackdropType="Mica"
     WindowCornerPreference="Round"
@@ -54,13 +54,13 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="{StaticResource AppSurfaceElevatedBrush}" />
-                                <Setter TargetName="Root" Property="BorderBrush" Value="{StaticResource AppStrokeBrush}" />
+                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppButtonHoverBrush}" />
+                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource AppStrokeBrush}" />
                                 <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="{StaticResource AppAccentSoftBrush}" />
-                                <Setter TargetName="Root" Property="BorderBrush" Value="{StaticResource AppAccentBrush}" />
+                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppButtonPressedBrush}" />
+                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource AppAccentBrush}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -92,8 +92,8 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Root" Property="Background" Value="{StaticResource AppDangerBrush}" />
-                                <Setter TargetName="Root" Property="BorderBrush" Value="{StaticResource AppDangerBrush}" />
+                                <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppDangerBrush}" />
+                                <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource AppDangerBrush}" />
                                 <Setter Property="Foreground" Value="White" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
@@ -106,13 +106,20 @@
         </Style>
     </ui:FluentWindow.Resources>
 
-    <Grid Background="{StaticResource AppBackgroundBrush}">
+    <Grid Background="Transparent">
         <Border Style="{StaticResource WindowShellStyle}"
-                Background="{StaticResource AppSurfaceBrush}"
-                BorderBrush="{StaticResource AppStrokeBrush}"
+                Background="{DynamicResource GlassShellBrush}"
+                BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1"
                 ClipToBounds="True">
             <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#22FFFFFF" Offset="0" />
+                        <GradientStop Color="#06000000" Offset="0.48" />
+                        <GradientStop Color="#14000000" Offset="1" />
+                    </LinearGradientBrush>
+                </Grid.Background>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="56" />
                     <RowDefinition Height="*" />
@@ -121,11 +128,11 @@
                 <Border Grid.Row="0"
                         Height="1"
                         VerticalAlignment="Top"
-                        Background="{StaticResource AppAccentBrush}"
+                        Background="{DynamicResource AppAccentBrush}"
                         Opacity="0.72" />
 
                 <Grid Grid.Row="0"
-                      Background="{StaticResource AppSurfaceSubtleBrush}"
+                      Background="{DynamicResource GlassSidebarBrush}"
                       MouseLeftButtonDown="TitleBar_OnMouseLeftButtonDown">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -141,14 +148,14 @@
                                 Height="34"
                                 Margin="0,0,11,0"
                                 CornerRadius="9"
-                                Background="{StaticResource AppAccentSoftBrush}"
-                                BorderBrush="{StaticResource AppStrokeBrush}"
+                                Background="{DynamicResource AppAccentSoftBrush}"
+                                BorderBrush="{DynamicResource AppStrokeBrush}"
                                 BorderThickness="1">
                             <ui:SymbolIcon Width="18"
                                            Height="18"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
-                                           Foreground="{StaticResource AppAccentBrush}"
+                                           Foreground="{DynamicResource AppAccentBrush}"
                                            Symbol="Settings24" />
                         </Border>
                         <StackPanel VerticalAlignment="Center">
@@ -171,8 +178,8 @@
                             Padding="10,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
-                            Background="{StaticResource AppSurfaceElevatedBrush}"
-                            BorderBrush="{StaticResource AppStrokeBrush}"
+                            Background="{DynamicResource GlassPanelElevatedBrush}"
+                            BorderBrush="{DynamicResource GlassStrokeBrush}"
                             BorderThickness="1"
                             CornerRadius="13">
                         <Grid>
@@ -183,7 +190,7 @@
                             <Ellipse Width="6"
                                      Height="6"
                                      VerticalAlignment="Center"
-                                     Fill="{StaticResource AppSuccessBrush}" />
+                                     Fill="{DynamicResource AppSuccessBrush}" />
                             <TextBlock Grid.Column="1"
                                        Margin="8,0,0,0"
                                        VerticalAlignment="Center"
@@ -202,7 +209,7 @@
                                 Height="20"
                                 Margin="0,0,10,0"
                                 VerticalAlignment="Center"
-                                Background="{StaticResource AppStrokeBrush}" />
+                                Background="{DynamicResource AppStrokeBrush}" />
 
                         <Button AutomationProperties.Name="Minimize window"
                                 Click="MinimizeButton_OnClick"
@@ -274,8 +281,8 @@
 
                 <Border Grid.Row="1"
                         Margin="12,0,12,12"
-                        Background="{StaticResource AppSurfaceSubtleBrush}"
-                        BorderBrush="{StaticResource AppStrokeBrush}"
+                        Background="{DynamicResource GlassPanelBrush}"
+                        BorderBrush="{DynamicResource GlassStrokeBrush}"
                         BorderThickness="1"
                         CornerRadius="10"
                         ClipToBounds="True">

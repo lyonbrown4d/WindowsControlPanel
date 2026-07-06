@@ -12,8 +12,8 @@
     <Grid Margin="{StaticResource AppPageMargin}">
         <Border Padding="18"
                 CornerRadius="8"
-                Background="{StaticResource AppSurfaceBrush}"
-                BorderBrush="{StaticResource AppStrokeBrush}"
+                Background="{DynamicResource AppSurfaceBrush}"
+                BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
                 <Grid.RowDefinitions>
@@ -32,16 +32,16 @@
                         Padding="16"
                         VerticalAlignment="Top"
                         CornerRadius="8"
-                        Background="{StaticResource AppSurfaceElevatedBrush}"
-                        BorderBrush="{StaticResource AppStrokeBrush}"
+                        Background="{DynamicResource AppSurfaceElevatedBrush}"
+                        BorderBrush="{DynamicResource AppStrokeBrush}"
                         BorderThickness="1">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Border Width="36" Height="36" Margin="0,0,12,0" CornerRadius="9" Background="{StaticResource AppAccentSoftBrush}" BorderBrush="{StaticResource AppStrokeBrush}" BorderThickness="1">
-                            <ui:SymbolIcon Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource AppAccentBrush}" Symbol="Settings24" />
+                        <Border Width="36" Height="36" Margin="0,0,12,0" CornerRadius="9" Background="{DynamicResource AppAccentSoftBrush}" BorderBrush="{DynamicResource AppStrokeBrush}" BorderThickness="1">
+                            <ui:SymbolIcon Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource AppAccentBrush}" Symbol="Settings24" />
                         </Border>
                         <StackPanel Grid.Column="1">
                             <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="页面骨架已就绪" />

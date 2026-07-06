@@ -34,16 +34,16 @@
                 Margin="0,0,0,14"
                 Padding="14"
                 CornerRadius="8"
-                Background="{StaticResource AppSurfaceElevatedBrush}"
-                BorderBrush="{StaticResource AppStrokeBrush}"
+                Background="{DynamicResource AppSurfaceElevatedBrush}"
+                BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Border Width="34" Height="34" Margin="0,0,12,0" CornerRadius="8" Background="{StaticResource AppSuccessSoftBrush}" BorderBrush="{StaticResource AppStrokeBrush}" BorderThickness="1">
-                    <ui:SymbolIcon Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource AppSuccessBrush}" Symbol="Games24" />
+                <Border Width="34" Height="34" Margin="0,0,12,0" CornerRadius="8" Background="{DynamicResource AppSuccessSoftBrush}" BorderBrush="{DynamicResource AppStrokeBrush}" BorderThickness="1">
+                    <ui:SymbolIcon Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource AppSuccessBrush}" Symbol="Games24" />
                 </Border>
                 <StackPanel Grid.Column="1">
                     <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="状态摘要" />
@@ -62,8 +62,8 @@
                     Margin="0,0,7,0"
                     Padding="14"
                     CornerRadius="8"
-                    Background="{StaticResource AppSurfaceBrush}"
-                    BorderBrush="{StaticResource AppStrokeBrush}"
+                    Background="{DynamicResource AppSurfaceBrush}"
+                    BorderBrush="{DynamicResource AppStrokeBrush}"
                     BorderThickness="1">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -79,11 +79,11 @@
                             Margin="0,14,0,14"
                             Padding="12"
                             CornerRadius="8"
-                            Background="#24EF4444"
-                            BorderBrush="{StaticResource AppStrokeBrush}"
+                            Background="{DynamicResource AppDangerSoftBrush}"
+                            BorderBrush="{DynamicResource AppStrokeBrush}"
                             BorderThickness="1">
                         <StackPanel>
-                            <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Foreground="{StaticResource AppDangerBrush}" Text="高风险操作" />
+                            <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Foreground="{DynamicResource AppDangerBrush}" Text="高风险操作" />
                             <TextBlock Margin="0,6,0,0" Style="{StaticResource AppBodyTextStyle}" Text="该操作可能影响虚拟化、容器和安全特性，执行前会出现确认提示。" />
                         </StackPanel>
                     </Border>
@@ -95,8 +95,8 @@
                     Margin="7,0,0,0"
                     Padding="14"
                     CornerRadius="8"
-                    Background="{StaticResource AppSurfaceBrush}"
-                    BorderBrush="{StaticResource AppStrokeBrush}"
+                    Background="{DynamicResource AppSurfaceBrush}"
+                    BorderBrush="{DynamicResource AppStrokeBrush}"
                     BorderThickness="1">
                 <StackPanel>
                     <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="图形与游戏设置入口" />
@@ -115,8 +115,8 @@
                 Margin="0,14,0,0"
                 Padding="12"
                 CornerRadius="8"
-                Background="{StaticResource AppSurfaceBrush}"
-                BorderBrush="{StaticResource AppStrokeBrush}"
+                Background="{DynamicResource AppSurfaceBrush}"
+                BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
                 <Grid.RowDefinitions>

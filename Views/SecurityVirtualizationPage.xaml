@@ -43,8 +43,8 @@
                 Margin="0,0,0,14"
                 Padding="14"
                 CornerRadius="8"
-                Background="{StaticResource AppSurfaceElevatedBrush}"
-                BorderBrush="{StaticResource AppStrokeBrush}"
+                Background="{DynamicResource AppSurfaceElevatedBrush}"
+                BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -90,8 +90,8 @@
             <Border Margin="0,0,7,0"
                     Padding="14"
                     CornerRadius="8"
-                    Background="{StaticResource AppSurfaceBrush}"
-                    BorderBrush="{StaticResource AppStrokeBrush}"
+                    Background="{DynamicResource AppSurfaceBrush}"
+                    BorderBrush="{DynamicResource AppStrokeBrush}"
                     BorderThickness="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -102,10 +102,10 @@
                             Height="36"
                             Margin="0,0,12,0"
                             CornerRadius="9"
-                            Background="{StaticResource AppAccentSoftBrush}"
-                            BorderBrush="{StaticResource AppStrokeBrush}"
+                            Background="{DynamicResource AppAccentSoftBrush}"
+                            BorderBrush="{DynamicResource AppStrokeBrush}"
                             BorderThickness="1">
-                        <ui:SymbolIcon Width="19" Height="19" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource AppAccentBrush}" Symbol="Code24" />
+                        <ui:SymbolIcon Width="19" Height="19" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource AppAccentBrush}" Symbol="Code24" />
                     </Border>
                     <StackPanel Grid.Column="1">
                         <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="开发模式预设" />
@@ -118,8 +118,8 @@
             <Border Margin="7,0,0,0"
                     Padding="14"
                     CornerRadius="8"
-                    Background="{StaticResource AppSurfaceBrush}"
-                    BorderBrush="{StaticResource AppStrokeBrush}"
+                    Background="{DynamicResource AppSurfaceBrush}"
+                    BorderBrush="{DynamicResource AppStrokeBrush}"
                     BorderThickness="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -130,10 +130,10 @@
                             Height="36"
                             Margin="0,0,12,0"
                             CornerRadius="9"
-                            Background="#24EF4444"
-                            BorderBrush="{StaticResource AppStrokeBrush}"
+                            Background="{DynamicResource AppDangerSoftBrush}"
+                            BorderBrush="{DynamicResource AppStrokeBrush}"
                             BorderThickness="1">
-                        <ui:SymbolIcon Width="19" Height="19" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource AppDangerBrush}" Symbol="Games24" />
+                        <ui:SymbolIcon Width="19" Height="19" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource AppDangerBrush}" Symbol="Games24" />
                     </Border>
                     <StackPanel Grid.Column="1">
                         <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="游戏模式预设" />
@@ -147,8 +147,8 @@
         <Border Grid.Row="3"
                 Padding="12"
                 CornerRadius="8"
-                Background="{StaticResource AppSurfaceBrush}"
-                BorderBrush="{StaticResource AppStrokeBrush}"
+                Background="{DynamicResource AppSurfaceBrush}"
+                BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
                 <Grid.RowDefinitions>

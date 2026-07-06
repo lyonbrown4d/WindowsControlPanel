@@ -39,8 +39,8 @@
                 Margin="0,0,0,14"
                 Padding="14"
                 CornerRadius="8"
-                Background="{StaticResource AppSurfaceElevatedBrush}"
-                BorderBrush="{StaticResource AppStrokeBrush}"
+                Background="{DynamicResource AppSurfaceElevatedBrush}"
+                BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -51,14 +51,14 @@
                         Height="34"
                         Margin="0,0,12,0"
                         CornerRadius="8"
-                        Background="{StaticResource AppSuccessSoftBrush}"
-                        BorderBrush="{StaticResource AppStrokeBrush}"
+                        Background="{DynamicResource AppSuccessSoftBrush}"
+                        BorderBrush="{DynamicResource AppStrokeBrush}"
                         BorderThickness="1">
                     <ui:SymbolIcon Width="18"
                                    Height="18"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"
-                                   Foreground="{StaticResource AppSuccessBrush}"
+                                   Foreground="{DynamicResource AppSuccessBrush}"
                                    Symbol="Globe24" />
                 </Border>
                 <StackPanel Grid.Column="1">
@@ -77,8 +77,8 @@
             <Border Grid.Column="0"
                     Padding="12"
                     CornerRadius="8"
-                    Background="{StaticResource AppSurfaceBrush}"
-                    BorderBrush="{StaticResource AppStrokeBrush}"
+                    Background="{DynamicResource AppSurfaceBrush}"
+                    BorderBrush="{DynamicResource AppStrokeBrush}"
                     BorderThickness="1">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -102,7 +102,7 @@
                                 <Setter Property="Padding" Value="10" />
                                 <Setter Property="Margin" Value="0,0,0,8" />
                                 <Setter Property="Background" Value="Transparent" />
-                                <Setter Property="BorderBrush" Value="{StaticResource AppStrokeBrush}" />
+                                <Setter Property="BorderBrush" Value="{DynamicResource AppStrokeBrush}" />
                                 <Setter Property="BorderThickness" Value="1" />
                                 <Setter Property="Cursor" Value="Hand" />
                                 <Setter Property="Template">
@@ -118,11 +118,11 @@
                                             </Border>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="Root" Property="Background" Value="{StaticResource AppSurfaceElevatedBrush}" />
+                                                    <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppSurfaceElevatedBrush}" />
                                                 </Trigger>
                                                 <Trigger Property="IsSelected" Value="True">
-                                                    <Setter TargetName="Root" Property="Background" Value="{StaticResource AppAccentSoftBrush}" />
-                                                    <Setter TargetName="Root" Property="BorderBrush" Value="{StaticResource AppAccentBrush}" />
+                                                    <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppAccentSoftBrush}" />
+                                                    <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource AppAccentBrush}" />
                                                 </Trigger>
                                             </ControlTemplate.Triggers>
                                         </ControlTemplate>
@@ -146,8 +146,8 @@
                     Margin="14,0,0,0"
                     Padding="12"
                     CornerRadius="8"
-                    Background="{StaticResource AppSurfaceBrush}"
-                    BorderBrush="{StaticResource AppStrokeBrush}"
+                    Background="{DynamicResource AppSurfaceBrush}"
+                    BorderBrush="{DynamicResource AppStrokeBrush}"
                     BorderThickness="1">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -173,8 +173,8 @@
                 Margin="0,14,0,0"
                 Padding="12"
                 CornerRadius="8"
-                Background="{StaticResource AppSurfaceBrush}"
-                BorderBrush="{StaticResource AppStrokeBrush}"
+                Background="{DynamicResource AppSurfaceBrush}"
+                BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
                 <Grid.RowDefinitions>

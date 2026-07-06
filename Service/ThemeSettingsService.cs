@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Media;
 using Microsoft.EntityFrameworkCore;
 using Wpf.Ui.Appearance;
@@ -148,33 +148,47 @@ public sealed class ThemeSettingsService : IThemeSettingsService
     private static void ApplyCustomPalette(ApplicationTheme theme)
     {
         var dark = theme != ApplicationTheme.Light;
-        SetBrush("AppBackgroundBrush", dark ? "#0B0F14" : "#F5F7FA");
-        SetBrush("AppSurfaceBrush", dark ? "#111820" : "#FFFFFF");
-        SetBrush("AppSurfaceElevatedBrush", dark ? "#17212B" : "#F9FAFB");
-        SetBrush("AppSurfaceSubtleBrush", dark ? "#0F151C" : "#EEF2F7");
-        SetBrush("AppStrokeBrush", dark ? "#263443" : "#D8DEE8");
-        SetBrush("AppStrokeStrongBrush", dark ? "#3A4A5C" : "#B9C3D1");
+        SetBrush("AppBackgroundBrush", dark ? "#330B0F14" : "#66F5F7FA");
+        SetBrush("AppSurfaceBrush", dark ? "#A6111820" : "#DFFFFFFF");
+        SetBrush("AppSurfaceElevatedBrush", dark ? "#CC17212B" : "#F2FFFFFF");
+        SetBrush("AppSurfaceSubtleBrush", dark ? "#8C0F151C" : "#D9EEF2F7");
+        SetBrush("AppStrokeBrush", dark ? "#55FFFFFF" : "#99CBD5E1");
+        SetBrush("AppStrokeStrongBrush", dark ? "#78FFFFFF" : "#CC94A3B8");
         SetBrush("AppAccentBrush", "#4F9CF9");
-        SetBrush("AppAccentSoftBrush", dark ? "#244F9CF9" : "#1A2563EB");
+        SetBrush("AppAccentSoftBrush", dark ? "#334F9CF9" : "#242563EB");
+        SetBrush("AppAccentHoverBrush", dark ? "#65B3FF" : "#2563EB");
+        SetBrush("AppButtonHoverBrush", dark ? "#22FFFFFF" : "#FFEAF2FF");
+        SetBrush("AppButtonPressedBrush", dark ? "#334F9CF9" : "#FFD8E8FF");
+        SetBrush("AppDangerSoftBrush", dark ? "#30EF4444" : "#1FB91C1C");
         SetBrush("AppSuccessBrush", dark ? "#22C55E" : "#15803D");
-        SetBrush("AppSuccessSoftBrush", dark ? "#1E22C55E" : "#1715803D");
+        SetBrush("AppSuccessSoftBrush", dark ? "#2622C55E" : "#1F15803D");
         SetBrush("AppWarningBrush", dark ? "#F59E0B" : "#B45309");
         SetBrush("AppDangerBrush", dark ? "#EF4444" : "#B91C1C");
-        SetBrush("GlassShellBrush", dark ? "#F20B0F14" : "#FFF5F7FA");
-        SetBrush("GlassPanelBrush", dark ? "#F2111820" : "#FFFFFFFF");
-        SetBrush("GlassPanelElevatedBrush", dark ? "#FA17212B" : "#FFF9FAFB");
-        SetBrush("GlassSidebarBrush", dark ? "#F70F151C" : "#FFF0F3F7");
-        SetBrush("GlassInputBrush", dark ? "#F00D131A" : "#FFFFFFFF");
-        SetBrush("GlassStrokeBrush", dark ? "#263443" : "#D8DEE8");
-        SetBrush("GlassStrokeStrongBrush", dark ? "#3A4A5C" : "#B9C3D1");
-        SetBrush("GlassAmbientBrush", dark ? "#0B0F14" : "#F5F7FA");
+        SetBrush("GlassShellBrush", dark ? "#8F0B0F14" : "#CFF7FAFC");
+        SetBrush("GlassPanelBrush", dark ? "#A8111820" : "#E6FFFFFF");
+        SetBrush("GlassPanelElevatedBrush", dark ? "#C817212B" : "#F2FFFFFF");
+        SetBrush("GlassSidebarBrush", dark ? "#9C0F151C" : "#DFF1F5F9");
+        SetBrush("GlassInputBrush", dark ? "#BA0D131A" : "#F5FFFFFF");
+        SetBrush("GlassStrokeBrush", dark ? "#55FFFFFF" : "#A5CBD5E1");
+        SetBrush("GlassStrokeStrongBrush", dark ? "#78FFFFFF" : "#CC94A3B8");
+        SetBrush("GlassAmbientBrush", dark ? "#260B0F14" : "#55F8FAFC");
+        SetBrush("GlassHighlightBrush", dark ? "#26FFFFFF" : "#A6FFFFFF");
     }
 
     private static void SetBrush(string key, string color)
     {
-        if (Application.Current?.Resources[key] is SolidColorBrush brush)
+        if (Application.Current is null)
         {
-            brush.Color = (Color)ColorConverter.ConvertFromString(color);
+            return;
         }
+
+        var parsedColor = (Color)ColorConverter.ConvertFromString(color);
+        if (Application.Current.Resources[key] is SolidColorBrush brush && !brush.IsFrozen)
+        {
+            brush.Color = parsedColor;
+            return;
+        }
+
+        Application.Current.Resources[key] = new SolidColorBrush(parsedColor);
     }
 }

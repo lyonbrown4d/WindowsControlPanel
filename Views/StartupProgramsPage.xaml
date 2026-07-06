@@ -47,8 +47,8 @@
                 Margin="0,0,0,14"
                 Padding="14"
                 CornerRadius="8"
-                Background="{StaticResource AppSurfaceElevatedBrush}"
-                BorderBrush="{StaticResource AppStrokeBrush}"
+                Background="{DynamicResource AppSurfaceElevatedBrush}"
+                BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -59,14 +59,14 @@
                         Height="34"
                         Margin="0,0,12,0"
                         CornerRadius="8"
-                        Background="{StaticResource AppAccentSoftBrush}"
-                        BorderBrush="{StaticResource AppStrokeBrush}"
+                        Background="{DynamicResource AppAccentSoftBrush}"
+                        BorderBrush="{DynamicResource AppStrokeBrush}"
                         BorderThickness="1">
                     <ui:SymbolIcon Width="18"
                                    Height="18"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"
-                                   Foreground="{StaticResource AppAccentBrush}"
+                                   Foreground="{DynamicResource AppAccentBrush}"
                                    Symbol="Rocket24" />
                 </Border>
                 <StackPanel Grid.Column="1">
@@ -82,8 +82,8 @@
         <Border Grid.Row="2"
                 Padding="12"
                 CornerRadius="8"
-                Background="{StaticResource AppSurfaceBrush}"
-                BorderBrush="{StaticResource AppStrokeBrush}"
+                Background="{DynamicResource AppSurfaceBrush}"
+                BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
                 <Grid.RowDefinitions>
@@ -101,8 +101,8 @@
                         <Border Margin="10,1,0,0"
                                 Padding="8,3"
                                 CornerRadius="10"
-                                Background="{StaticResource AppSurfaceElevatedBrush}"
-                                BorderBrush="{StaticResource AppStrokeBrush}"
+                                Background="{DynamicResource AppSurfaceElevatedBrush}"
+                                BorderBrush="{DynamicResource AppStrokeBrush}"
                                 BorderThickness="1">
                             <TextBlock FontSize="11"
                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
@@ -144,8 +144,8 @@
                 Margin="0,14,0,0"
                 Padding="12"
                 CornerRadius="8"
-                Background="{StaticResource AppSurfaceBrush}"
-                BorderBrush="{StaticResource AppStrokeBrush}"
+                Background="{DynamicResource AppSurfaceBrush}"
+                BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
                 <Grid.RowDefinitions>
