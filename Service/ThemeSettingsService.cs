@@ -28,6 +28,7 @@ public sealed class ThemeSettingsService : IThemeSettingsService
     private readonly AppDbContext _dbContext;
     private readonly SemaphoreSlim _dbLock = new(1, 1);
     private Window? _watchedWindow;
+    private Window? _pendingWatchWindow;
     private AppThemePreference _currentPreference = AppThemePreference.FollowSystem;
 
     public ThemeSettingsService(AppDbContext dbContext)
@@ -85,14 +86,15 @@ public sealed class ThemeSettingsService : IThemeSettingsService
     public void ApplyTheme(AppThemePreference preference, Window? window = null)
     {
         _currentPreference = preference;
+        var previousWindow = _watchedWindow;
         if (window is not null)
         {
             _watchedWindow = window;
         }
 
-        if (_watchedWindow is not null)
+        if (previousWindow is not null && previousWindow.IsLoaded)
         {
-            SystemThemeWatcher.UnWatch(_watchedWindow);
+            TryUnwatch(previousWindow);
         }
 
         var theme = ResolveTheme(preference);
@@ -101,7 +103,7 @@ public sealed class ThemeSettingsService : IThemeSettingsService
 
         if (preference == AppThemePreference.FollowSystem && _watchedWindow is not null)
         {
-            SystemThemeWatcher.Watch(_watchedWindow, WindowBackdropType.Mica, updateAccents: true);
+            WatchWhenLoaded(_watchedWindow);
         }
     }
 
@@ -145,18 +147,61 @@ public sealed class ThemeSettingsService : IThemeSettingsService
         };
     }
 
+    private void WatchWhenLoaded(Window window)
+    {
+        if (window.IsLoaded)
+        {
+            SystemThemeWatcher.Watch(window, WindowBackdropType.Mica, updateAccents: true);
+            return;
+        }
+
+        if (ReferenceEquals(_pendingWatchWindow, window))
+        {
+            return;
+        }
+
+        _pendingWatchWindow = window;
+        RoutedEventHandler? loadedHandler = null;
+        loadedHandler = (_, _) =>
+        {
+            window.Loaded -= loadedHandler;
+            if (ReferenceEquals(_pendingWatchWindow, window))
+            {
+                _pendingWatchWindow = null;
+            }
+
+            if (_currentPreference == AppThemePreference.FollowSystem && ReferenceEquals(_watchedWindow, window))
+            {
+                SystemThemeWatcher.Watch(window, WindowBackdropType.Mica, updateAccents: true);
+            }
+        };
+
+        window.Loaded += loadedHandler;
+    }
+
+    private static void TryUnwatch(Window window)
+    {
+        try
+        {
+            SystemThemeWatcher.UnWatch(window);
+        }
+        catch (InvalidOperationException)
+        {
+        }
+    }
+
     private static void ApplyCustomPalette(ApplicationTheme theme)
     {
         var dark = theme != ApplicationTheme.Light;
-        SetBrush("AppBackgroundBrush", dark ? "#330B0F14" : "#66F5F7FA");
-        SetBrush("AppSurfaceBrush", dark ? "#A6111820" : "#DFFFFFFF");
-        SetBrush("AppSurfaceElevatedBrush", dark ? "#CC17212B" : "#F2FFFFFF");
-        SetBrush("AppSurfaceSubtleBrush", dark ? "#8C0F151C" : "#D9EEF2F7");
+        SetBrush("AppBackgroundBrush", dark ? "#220B0F14" : "#66F5F7FA");
+        SetBrush("AppSurfaceBrush", dark ? "#80111820" : "#EAF8FAFC");
+        SetBrush("AppSurfaceElevatedBrush", dark ? "#B817212B" : "#F7FFFFFF");
+        SetBrush("AppSurfaceSubtleBrush", dark ? "#660F151C" : "#DDEEF2F7");
         SetBrush("AppStrokeBrush", dark ? "#55FFFFFF" : "#99CBD5E1");
         SetBrush("AppStrokeStrongBrush", dark ? "#78FFFFFF" : "#CC94A3B8");
-        SetBrush("AppAccentBrush", "#4F9CF9");
-        SetBrush("AppAccentSoftBrush", dark ? "#334F9CF9" : "#242563EB");
-        SetBrush("AppAccentHoverBrush", dark ? "#65B3FF" : "#2563EB");
+        SetBrush("AppAccentBrush", dark ? "#60A5FA" : "#2563EB");
+        SetBrush("AppAccentSoftBrush", dark ? "#2A60A5FA" : "#1A2563EB");
+        SetBrush("AppAccentHoverBrush", dark ? "#93C5FD" : "#1D4ED8");
         SetBrush("AppButtonHoverBrush", dark ? "#22FFFFFF" : "#FFEAF2FF");
         SetBrush("AppButtonPressedBrush", dark ? "#334F9CF9" : "#FFD8E8FF");
         SetBrush("AppDangerSoftBrush", dark ? "#30EF4444" : "#1FB91C1C");
@@ -164,14 +209,14 @@ public sealed class ThemeSettingsService : IThemeSettingsService
         SetBrush("AppSuccessSoftBrush", dark ? "#2622C55E" : "#1F15803D");
         SetBrush("AppWarningBrush", dark ? "#F59E0B" : "#B45309");
         SetBrush("AppDangerBrush", dark ? "#EF4444" : "#B91C1C");
-        SetBrush("GlassShellBrush", dark ? "#8F0B0F14" : "#CFF7FAFC");
-        SetBrush("GlassPanelBrush", dark ? "#A8111820" : "#E6FFFFFF");
-        SetBrush("GlassPanelElevatedBrush", dark ? "#C817212B" : "#F2FFFFFF");
-        SetBrush("GlassSidebarBrush", dark ? "#9C0F151C" : "#DFF1F5F9");
+        SetBrush("GlassShellBrush", dark ? "#730B0F14" : "#CFF7FAFC");
+        SetBrush("GlassPanelBrush", dark ? "#86111820" : "#E6FFFFFF");
+        SetBrush("GlassPanelElevatedBrush", dark ? "#B817212B" : "#F7FFFFFF");
+        SetBrush("GlassSidebarBrush", dark ? "#820F151C" : "#DFF1F5F9");
         SetBrush("GlassInputBrush", dark ? "#BA0D131A" : "#F5FFFFFF");
         SetBrush("GlassStrokeBrush", dark ? "#55FFFFFF" : "#A5CBD5E1");
         SetBrush("GlassStrokeStrongBrush", dark ? "#78FFFFFF" : "#CC94A3B8");
-        SetBrush("GlassAmbientBrush", dark ? "#260B0F14" : "#55F8FAFC");
+        SetBrush("GlassAmbientBrush", dark ? "#1C0B0F14" : "#55F8FAFC");
         SetBrush("GlassHighlightBrush", dark ? "#26FFFFFF" : "#A6FFFFFF");
     }
 

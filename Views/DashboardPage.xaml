@@ -9,89 +9,177 @@
              mc:Ignorable="d"
              d:DesignHeight="650"
              d:DesignWidth="980">
-    <Grid Margin="24" Background="Transparent">
+    <Grid Margin="20" Background="Transparent">
         <Grid.Resources>
             <Style x:Key="CaptionStyle" TargetType="TextBlock">
-                <Setter Property="FontSize" Value="12" />
-                <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
-                <Setter Property="TextWrapping" Value="Wrap" />
-            </Style>
-            <Style x:Key="SectionTitleStyle" TargetType="TextBlock">
-                <Setter Property="FontSize" Value="18" />
-                <Setter Property="FontWeight" Value="SemiBold" />
-            </Style>
-            <Style x:Key="MetricCardStyle" TargetType="Border">
-                <Setter Property="MinHeight" Value="76" />
-                <Setter Property="Padding" Value="14" />
-                <Setter Property="CornerRadius" Value="8" />
-                <Setter Property="Background" Value="{DynamicResource AppSurfaceElevatedBrush}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource AppStrokeBrush}" />
-                <Setter Property="BorderThickness" Value="1" />
-            </Style>
-            <Style x:Key="ModuleTileStyle" TargetType="Border">
-                <Setter Property="MinHeight" Value="118" />
-                <Setter Property="Padding" Value="14" />
-                <Setter Property="CornerRadius" Value="8" />
-                <Setter Property="Background" Value="{DynamicResource AppSurfaceElevatedBrush}" />
-                <Setter Property="BorderBrush" Value="{DynamicResource AppStrokeBrush}" />
-                <Setter Property="BorderThickness" Value="1" />
-            </Style>
-            <Style x:Key="ModuleBodyStyle" TargetType="TextBlock">
-                <Setter Property="Margin" Value="0,7,0,0" />
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="LineHeight" Value="18" />
                 <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
                 <Setter Property="TextWrapping" Value="Wrap" />
             </Style>
+
+            <Style x:Key="SectionTitleStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+            </Style>
+
+            <Style x:Key="PanelStyle" TargetType="Border">
+                <Setter Property="Padding" Value="14" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Background" Value="{DynamicResource GlassPanelBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AppStrokeBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+            </Style>
+
+            <Style x:Key="StatusPillStyle" TargetType="Border">
+                <Setter Property="MinHeight" Value="54" />
+                <Setter Property="Padding" Value="12,8" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Background" Value="{DynamicResource GlassPanelElevatedBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AppStrokeBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+            </Style>
+            <Style x:Key="AccentButtonStyle" TargetType="Button">
+                <Setter Property="MinHeight" Value="36" />
+                <Setter Property="Padding" Value="13,0" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Background" Value="{DynamicResource AppAccentBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AppAccentBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="Root"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="9"
+                                    SnapsToDevicePixels="True">
+                                <ContentPresenter Margin="{TemplateBinding Padding}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  RecognizesAccessKey="True" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppAccentHoverBrush}" />
+                                    <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource AppAccentHoverBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppAccentBrush}" />
+                                    <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource AppAccentBrush}" />
+                                    <Setter TargetName="Root" Property="Opacity" Value="0.9" />
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource AppStrokeStrongBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="Root" Property="Opacity" Value="0.55" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="SettingRowButtonStyle" TargetType="Button">
+                <Setter Property="MinHeight" Value="62" />
+                <Setter Property="Padding" Value="12,9" />
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="Root"
+                                    Padding="{TemplateBinding Padding}"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="9"
+                                    SnapsToDevicePixels="True">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppButtonHoverBrush}" />
+                                    <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource AppStrokeStrongBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppButtonPressedBrush}" />
+                                    <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource AppAccentBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource AppAccentBrush}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="DividerStyle" TargetType="Border">
+                <Setter Property="Height" Value="1" />
+                <Setter Property="Margin" Value="0,2" />
+                <Setter Property="Background" Value="{DynamicResource AppStrokeBrush}" />
+                <Setter Property="Opacity" Value="0.55" />
+            </Style>
         </Grid.Resources>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Margin="0,0,0,18">
+        <Grid Grid.Row="0" Margin="0,0,0,14">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <StackPanel>
-                <TextBlock FontSize="12"
-                           FontWeight="SemiBold"
-                           Foreground="{DynamicResource AppAccentBrush}"
-                           Text="CONTROL CENTER" />
+
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Style="{StaticResource AppEyebrowTextStyle}" Text="CONTROL CENTER" />
                 <TextBlock Margin="0,4,0,0"
                            FontSize="28"
                            FontWeight="SemiBold"
                            Text="系统控制台" />
-                <TextBlock Margin="0,6,0,0"
+                <TextBlock Margin="0,7,0,0"
                            Style="{StaticResource CaptionStyle}"
-                           Text="查看当前系统基线，快速进入虚拟化、启动项、网络和维护工具。" />
+                           Text="以 Windows Settings 的信息层级管理虚拟化、安全、启动项、网络和维护入口。" />
             </StackPanel>
+
             <StackPanel Grid.Column="1"
-                        Margin="20,0,0,0"
+                        Margin="18,0,0,0"
                         VerticalAlignment="Center"
                         Orientation="Horizontal">
-                <Border Width="230"
-                        Height="54"
+                <Border Width="276"
+                        Height="52"
                         Margin="0,0,10,0"
                         Padding="12,7"
                         CornerRadius="8"
-                        Background="{DynamicResource AppSurfaceElevatedBrush}"
+                        Background="{DynamicResource GlassPanelBrush}"
                         BorderBrush="{DynamicResource AppStrokeBrush}"
                         BorderThickness="1">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="112" />
+                            <ColumnDefinition Width="116" />
                         </Grid.ColumnDefinitions>
-                        <StackPanel>
-                            <TextBlock FontSize="12"
-                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                       Text="外观主题" />
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="外观主题" />
                             <TextBlock Margin="0,3,0,0"
                                        FontSize="12"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                        Text="{Binding ThemeSummary}" />
                         </StackPanel>
                         <ComboBox Grid.Column="1"
@@ -103,211 +191,297 @@
                                   SelectedValue="{Binding SelectedThemePreference, Mode=TwoWay}" />
                     </Grid>
                 </Border>
-                <ui:Button Width="124"
-                           Height="36"
-                           VerticalAlignment="Center"
-                           Appearance="Primary"
-                           Command="{Binding RefreshCommand}"
-                           Content="刷新状态">
-                    <ui:Button.Icon>
-                        <ui:SymbolIcon Symbol="ArrowClockwise24" />
-                    </ui:Button.Icon>
-                </ui:Button>
+
+                <Button Width="124"
+                        Height="38"
+                        VerticalAlignment="Center"
+                        Command="{Binding RefreshCommand}"
+                        Style="{StaticResource AccentButtonStyle}"
+                        ToolTip="刷新系统状态">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                        <ui:SymbolIcon Width="16"
+                                       Height="16"
+                                       VerticalAlignment="Center"
+                                       Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                                       Symbol="ArrowClockwise24" />
+                        <TextBlock Margin="8,0,0,0"
+                                   VerticalAlignment="Center"
+                                   FontSize="13"
+                                   FontWeight="SemiBold"
+                                   Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                                   Text="刷新状态" />
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </Grid>
 
-        <UniformGrid Grid.Row="1" Columns="4" Margin="0,0,0,18">
-            <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,12,0">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <ui:SymbolIcon Width="20" Height="20" Margin="0,2,12,0" Foreground="{DynamicResource AppAccentBrush}" Symbol="PersonKey20" />
-                    <StackPanel Grid.Column="1">
-                        <TextBlock Style="{StaticResource CaptionStyle}" Text="权限状态" />
-                        <TextBlock Margin="0,5,0,0" FontSize="13" FontWeight="SemiBold" Text="{Binding AdministratorStatus}" TextWrapping="Wrap" />
-                    </StackPanel>
-                </Grid>
-            </Border>
-
-            <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,12,0">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <ui:SymbolIcon Width="20" Height="20" Margin="0,2,12,0" Foreground="{DynamicResource AppSuccessBrush}" Symbol="Ram20" />
-                    <StackPanel Grid.Column="1">
-                        <TextBlock Style="{StaticResource CaptionStyle}" Text="内存" />
-                        <TextBlock Margin="0,5,0,0" FontSize="13" FontWeight="SemiBold" Text="{Binding MemoryStatus}" TextWrapping="Wrap" />
-                    </StackPanel>
-                </Grid>
-            </Border>
-
-            <Border Style="{StaticResource MetricCardStyle}" Margin="0,0,12,0">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <ui:SymbolIcon Width="20" Height="20" Margin="0,2,12,0" Foreground="{DynamicResource AppWarningBrush}" Symbol="ShieldLock24" />
-                    <StackPanel Grid.Column="1">
-                        <TextBlock Style="{StaticResource CaptionStyle}" Text="安全基线" />
-                        <TextBlock Margin="0,5,0,0" FontSize="13" FontWeight="SemiBold" Text="{Binding SecuritySummary}" TextWrapping="Wrap" />
-                    </StackPanel>
-                </Grid>
-            </Border>
-
-            <Border Style="{StaticResource MetricCardStyle}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <ui:SymbolIcon Width="20" Height="20" Margin="0,2,12,0" Foreground="{DynamicResource AppAccentBrush}" Symbol="Desktop24" />
-                    <StackPanel Grid.Column="1">
-                        <TextBlock Style="{StaticResource CaptionStyle}" Text="最近刷新" />
-                        <TextBlock Margin="0,5,0,0" FontSize="13" FontWeight="SemiBold" Text="{Binding LastRefreshTime}" TextWrapping="Wrap" />
-                    </StackPanel>
-                </Grid>
-            </Border>
-        </UniformGrid>
-
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="340" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <Grid Grid.Column="0" Margin="0,0,18,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
-                <ui:Card Grid.Row="0" Padding="16" Margin="0,0,0,14">
-                    <StackPanel>
-                        <TextBlock Style="{StaticResource SectionTitleStyle}" Text="系统概览" />
-                        <TextBlock Margin="0,10,0,0" FontSize="13" LineHeight="20" Text="{Binding SystemInfoSummary}" TextWrapping="Wrap" />
-                        <Border Height="1" Margin="0,14" Background="{DynamicResource AppStrokeBrush}" />
-                        <TextBlock Style="{StaticResource CaptionStyle}" Text="虚拟化" />
-                        <TextBlock Margin="0,5,0,0" FontSize="13" Text="{Binding VirtualizationSummary}" TextWrapping="Wrap" />
-                        <TextBlock Margin="0,12,0,0" Style="{StaticResource CaptionStyle}" Text="性能" />
-                        <TextBlock Margin="0,5,0,0" FontSize="13" Text="{Binding PerformanceSummary}" TextWrapping="Wrap" />
-                    </StackPanel>
-                </ui:Card>
-
-                <ui:Card Grid.Row="1" Padding="16">
-                    <StackPanel>
-                        <TextBlock Style="{StaticResource SectionTitleStyle}" Text="推荐动作" />
-                        <TextBlock Margin="0,12,0,0" Style="{StaticResource CaptionStyle}" Text="安全建议" />
-                        <TextBlock Margin="0,5,0,0" FontSize="13" LineHeight="20" Text="{Binding SecurityRecommendation}" TextWrapping="Wrap" />
-                        <TextBlock Margin="0,14,0,0" Style="{StaticResource CaptionStyle}" Text="性能建议" />
-                        <TextBlock Margin="0,5,0,0" FontSize="13" LineHeight="20" Text="{Binding PerformanceRecommendation}" TextWrapping="Wrap" />
-                    </StackPanel>
-                </ui:Card>
-            </Grid>
-
-            <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
-                <UniformGrid Columns="2">
-                    <Border Style="{StaticResource ModuleTileStyle}" Margin="0,0,12,12">
+        <ScrollViewer Grid.Row="1"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <UniformGrid Columns="4" Margin="0,0,0,12">
+                    <Border Style="{StaticResource StatusPillStyle}" Margin="0,0,10,0">
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <StackPanel Orientation="Horizontal">
-                                <ui:SymbolIcon Width="20" Height="20" Margin="0,0,8,0" Foreground="{DynamicResource AppWarningBrush}" Symbol="ShieldLock24" />
-                                <TextBlock FontSize="16" FontWeight="SemiBold" Text="安全与虚拟化" />
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ui:SymbolIcon Width="18" Height="18" Margin="0,2,12,0" Foreground="{DynamicResource AppAccentBrush}" Symbol="PersonKey20" />
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="权限" />
+                                <TextBlock Margin="0,4,0,0" FontSize="13" FontWeight="SemiBold" Text="{Binding AdministratorStatus}" TextWrapping="Wrap" />
                             </StackPanel>
-                            <TextBlock Grid.Row="1" Style="{StaticResource ModuleBodyStyle}" Text="VBS、HVCI、Hyper-V、WSL 和虚拟化平台状态与预设。" />
-                            <ui:Button Grid.Row="2" Margin="0,12,0,0" Width="116" HorizontalAlignment="Left" Appearance="Primary" Command="{Binding OpenSecurityCommand}" Content="打开" />
                         </Grid>
                     </Border>
 
-                    <Border Style="{StaticResource ModuleTileStyle}" Margin="0,0,0,12">
+                    <Border Style="{StaticResource StatusPillStyle}" Margin="0,0,10,0">
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <StackPanel Orientation="Horizontal">
-                                <ui:SymbolIcon Width="20" Height="20" Margin="0,0,8,0" Foreground="{DynamicResource AppAccentBrush}" Symbol="Code24" />
-                                <TextBlock FontSize="16" FontWeight="SemiBold" Text="开发环境" />
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ui:SymbolIcon Width="18" Height="18" Margin="0,2,12,0" Foreground="{DynamicResource AppSuccessBrush}" Symbol="Ram20" />
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="内存" />
+                                <TextBlock Margin="0,4,0,0" FontSize="13" FontWeight="SemiBold" Text="{Binding MemoryStatus}" TextWrapping="Wrap" />
                             </StackPanel>
-                            <TextBlock Grid.Row="1" Style="{StaticResource ModuleBodyStyle}" Text="开发者模式、Windows Sudo、winget 清单和容器相关入口。" />
-                            <ui:Button Grid.Row="2" Margin="0,12,0,0" Width="116" HorizontalAlignment="Left" Appearance="Secondary" Command="{Binding OpenDevelopmentCommand}" Content="打开" />
                         </Grid>
                     </Border>
 
-                    <Border Style="{StaticResource ModuleTileStyle}" Margin="0,0,12,12">
+                    <Border Style="{StaticResource StatusPillStyle}" Margin="0,0,10,0">
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <StackPanel Orientation="Horizontal">
-                                <ui:SymbolIcon Width="20" Height="20" Margin="0,0,8,0" Foreground="{DynamicResource AppSuccessBrush}" Symbol="Games24" />
-                                <TextBlock FontSize="16" FontWeight="SemiBold" Text="游戏优化" />
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ui:SymbolIcon Width="18" Height="18" Margin="0,2,12,0" Foreground="{DynamicResource AppWarningBrush}" Symbol="ShieldLock24" />
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="安全基线" />
+                                <TextBlock Margin="0,4,0,0" FontSize="13" FontWeight="SemiBold" Text="{Binding SecuritySummary}" TextWrapping="Wrap" />
                             </StackPanel>
-                            <TextBlock Grid.Row="1" Style="{StaticResource ModuleBodyStyle}" Text="图形设置、游戏模式和偏性能优先的虚拟化链路切换。" />
-                            <ui:Button Grid.Row="2" Margin="0,12,0,0" Width="116" HorizontalAlignment="Left" Appearance="Secondary" Command="{Binding OpenGameCommand}" Content="打开" />
                         </Grid>
                     </Border>
 
-                    <Border Style="{StaticResource ModuleTileStyle}" Margin="0,0,0,12">
+                    <Border Style="{StaticResource StatusPillStyle}">
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <StackPanel Orientation="Horizontal">
-                                <ui:SymbolIcon Width="20" Height="20" Margin="0,0,8,0" Foreground="{DynamicResource AppAccentBrush}" Symbol="Rocket24" />
-                                <TextBlock FontSize="16" FontWeight="SemiBold" Text="启动项" />
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ui:SymbolIcon Width="18" Height="18" Margin="0,2,12,0" Foreground="{DynamicResource AppAccentBrush}" Symbol="Desktop24" />
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="最近刷新" />
+                                <TextBlock Margin="0,4,0,0" FontSize="13" FontWeight="SemiBold" Text="{Binding LastRefreshTime}" TextWrapping="Wrap" />
                             </StackPanel>
-                            <TextBlock Grid.Row="1" Style="{StaticResource ModuleBodyStyle}" Text="只读查看 WMI 与注册表启动项来源、命令和作用范围。" />
-                            <ui:Button Grid.Row="2" Margin="0,12,0,0" Width="116" HorizontalAlignment="Left" Appearance="Secondary" Command="{Binding OpenStartupCommand}" Content="打开" />
-                        </Grid>
-                    </Border>
-
-                    <Border Style="{StaticResource ModuleTileStyle}" Margin="0,0,12,0">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <StackPanel Orientation="Horizontal">
-                                <ui:SymbolIcon Width="20" Height="20" Margin="0,0,8,0" Foreground="{DynamicResource AppWarningBrush}" Symbol="Delete24" />
-                                <TextBlock FontSize="16" FontWeight="SemiBold" Text="磁盘与清理" />
-                            </StackPanel>
-                            <TextBlock Grid.Row="1" Style="{StaticResource ModuleBodyStyle}" Text="存储感知、能耗报告、电池报告和维护入口。" />
-                            <ui:Button Grid.Row="2" Margin="0,12,0,0" Width="116" HorizontalAlignment="Left" Appearance="Secondary" Command="{Binding OpenCleanupCommand}" Content="打开" />
-                        </Grid>
-                    </Border>
-
-                    <Border Style="{StaticResource ModuleTileStyle}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <StackPanel Orientation="Horizontal">
-                                <ui:SymbolIcon Width="20" Height="20" Margin="0,0,8,0" Foreground="{DynamicResource AppSuccessBrush}" Symbol="Globe24" />
-                                <TextBlock FontSize="16" FontWeight="SemiBold" Text="网络与 DNS" />
-                            </StackPanel>
-                            <TextBlock Grid.Row="1" Style="{StaticResource ModuleBodyStyle}" Text="查看适配器、IPv4、DNS、DHCP、网关和连接状态。" />
-                            <ui:Button Grid.Row="2" Margin="0,12,0,0" Width="116" HorizontalAlignment="Left" Appearance="Secondary" Command="{Binding OpenNetworkCommand}" Content="打开" />
                         </Grid>
                     </Border>
                 </UniformGrid>
-            </ScrollViewer>
-        </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.4*" MinWidth="340" MaxWidth="410" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Margin="0,0,14,0">
+                        <Border Style="{StaticResource PanelStyle}" Margin="0,0,0,12">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource SectionTitleStyle}" Text="推荐动作" />
+                                        <TextBlock Margin="0,5,0,0" Style="{StaticResource CaptionStyle}" Text="根据当前基线给出下一步操作建议。" />
+                                    </StackPanel>
+                                    <Border Grid.Column="1"
+                                            Height="28"
+                                            Padding="10,0"
+                                            VerticalAlignment="Top"
+                                            CornerRadius="14"
+                                            Background="{DynamicResource AppAccentSoftBrush}"
+                                            BorderBrush="{DynamicResource AppAccentBrush}"
+                                            BorderThickness="1">
+                                        <TextBlock VerticalAlignment="Center" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource AppAccentBrush}" Text="LIVE" />
+                                    </Border>
+                                </Grid>
+
+                                <Border Grid.Row="1" Margin="0,15,0,13" Style="{StaticResource DividerStyle}" />
+
+                                <StackPanel Grid.Row="2">
+                                    <Grid Margin="0,0,0,12">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <ui:SymbolIcon Width="18" Height="18" Margin="0,2,10,0" Foreground="{DynamicResource AppWarningBrush}" Symbol="ShieldLock24" />
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock FontSize="13" FontWeight="SemiBold" Text="安全建议" />
+                                            <TextBlock Margin="0,5,0,0" Style="{StaticResource CaptionStyle}" Text="{Binding SecurityRecommendation}" />
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <ui:SymbolIcon Width="18" Height="18" Margin="0,2,10,0" Foreground="{DynamicResource AppSuccessBrush}" Symbol="Games24" />
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock FontSize="13" FontWeight="SemiBold" Text="性能建议" />
+                                            <TextBlock Margin="0,5,0,0" Style="{StaticResource CaptionStyle}" Text="{Binding PerformanceRecommendation}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <Border Style="{StaticResource PanelStyle}">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource SectionTitleStyle}" Text="系统基线" />
+                                <TextBlock Margin="0,8,0,0" FontSize="12" LineHeight="18" Text="{Binding SystemInfoSummary}" TextWrapping="Wrap" />
+                                <Border Style="{StaticResource DividerStyle}" Margin="0,12" />
+                                <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="虚拟化" />
+                                <TextBlock Margin="0,5,0,0" FontSize="12" LineHeight="18" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{Binding VirtualizationSummary}" TextWrapping="Wrap" />
+                                <TextBlock Margin="0,10,0,0" Style="{StaticResource AppSmallLabelTextStyle}" Text="性能" />
+                                <TextBlock Margin="0,5,0,0" FontSize="12" LineHeight="18" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{Binding PerformanceSummary}" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+
+                    <Border Grid.Column="1" Style="{StaticResource PanelStyle}">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource SectionTitleStyle}" Text="工具入口" />
+                            <TextBlock Margin="0,4,0,8" Style="{StaticResource CaptionStyle}" Text="整行可点击，进入对应设置页。" />
+
+                            <Button Style="{StaticResource SettingRowButtonStyle}" Command="{Binding OpenSecurityCommand}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border Width="34" Height="34" Margin="0,0,12,0" CornerRadius="9" Background="{DynamicResource AppAccentSoftBrush}">
+                                        <ui:SymbolIcon Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource AppWarningBrush}" Symbol="ShieldLock24" />
+                                    </Border>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock FontSize="14" FontWeight="SemiBold" Text="安全与虚拟化" />
+                                        <TextBlock Margin="0,4,0,0" Style="{StaticResource CaptionStyle}" Text="VBS、HVCI、Hyper-V、WSL 和虚拟化平台状态与预设。" />
+                                    </StackPanel>
+                                    <Path Grid.Column="2" Width="8" Height="13" Margin="16,0,2,0" VerticalAlignment="Center" Data="M 1 1 L 7 6.5 L 1 12" Stroke="{DynamicResource TextFillColorSecondaryBrush}" StrokeEndLineCap="Round" StrokeStartLineCap="Round" StrokeThickness="1.6" Stretch="None" />
+                                </Grid>
+                            </Button>
+
+                            <Border Style="{StaticResource DividerStyle}" />
+
+                            <Button Style="{StaticResource SettingRowButtonStyle}" Command="{Binding OpenDevelopmentCommand}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border Width="34" Height="34" Margin="0,0,12,0" CornerRadius="9" Background="{DynamicResource AppAccentSoftBrush}">
+                                        <ui:SymbolIcon Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource AppAccentBrush}" Symbol="Code24" />
+                                    </Border>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock FontSize="14" FontWeight="SemiBold" Text="开发环境" />
+                                        <TextBlock Margin="0,4,0,0" Style="{StaticResource CaptionStyle}" Text="开发者模式、Windows Sudo、winget 清单和容器相关入口。" />
+                                    </StackPanel>
+                                    <Path Grid.Column="2" Width="8" Height="13" Margin="16,0,2,0" VerticalAlignment="Center" Data="M 1 1 L 7 6.5 L 1 12" Stroke="{DynamicResource TextFillColorSecondaryBrush}" StrokeEndLineCap="Round" StrokeStartLineCap="Round" StrokeThickness="1.6" Stretch="None" />
+                                </Grid>
+                            </Button>
+
+                            <Border Style="{StaticResource DividerStyle}" />
+
+                            <Button Style="{StaticResource SettingRowButtonStyle}" Command="{Binding OpenGameCommand}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border Width="34" Height="34" Margin="0,0,12,0" CornerRadius="9" Background="{DynamicResource AppSuccessSoftBrush}">
+                                        <ui:SymbolIcon Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource AppSuccessBrush}" Symbol="Games24" />
+                                    </Border>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock FontSize="14" FontWeight="SemiBold" Text="游戏优化" />
+                                        <TextBlock Margin="0,4,0,0" Style="{StaticResource CaptionStyle}" Text="图形设置、游戏模式和偏性能优先的虚拟化链路切换。" />
+                                    </StackPanel>
+                                    <Path Grid.Column="2" Width="8" Height="13" Margin="16,0,2,0" VerticalAlignment="Center" Data="M 1 1 L 7 6.5 L 1 12" Stroke="{DynamicResource TextFillColorSecondaryBrush}" StrokeEndLineCap="Round" StrokeStartLineCap="Round" StrokeThickness="1.6" Stretch="None" />
+                                </Grid>
+                            </Button>
+
+                            <Border Style="{StaticResource DividerStyle}" />
+
+                            <Button Style="{StaticResource SettingRowButtonStyle}" Command="{Binding OpenStartupCommand}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border Width="34" Height="34" Margin="0,0,12,0" CornerRadius="9" Background="{DynamicResource AppAccentSoftBrush}">
+                                        <ui:SymbolIcon Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource AppAccentBrush}" Symbol="Rocket24" />
+                                    </Border>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock FontSize="14" FontWeight="SemiBold" Text="启动项" />
+                                        <TextBlock Margin="0,4,0,0" Style="{StaticResource CaptionStyle}" Text="只读查看 WMI 与注册表启动项来源、命令和作用范围。" />
+                                    </StackPanel>
+                                    <Path Grid.Column="2" Width="8" Height="13" Margin="16,0,2,0" VerticalAlignment="Center" Data="M 1 1 L 7 6.5 L 1 12" Stroke="{DynamicResource TextFillColorSecondaryBrush}" StrokeEndLineCap="Round" StrokeStartLineCap="Round" StrokeThickness="1.6" Stretch="None" />
+                                </Grid>
+                            </Button>
+
+                            <Border Style="{StaticResource DividerStyle}" />
+
+                            <Button Style="{StaticResource SettingRowButtonStyle}" Command="{Binding OpenCleanupCommand}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border Width="34" Height="34" Margin="0,0,12,0" CornerRadius="9" Background="{DynamicResource AppDangerSoftBrush}">
+                                        <ui:SymbolIcon Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource AppWarningBrush}" Symbol="Delete24" />
+                                    </Border>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock FontSize="14" FontWeight="SemiBold" Text="磁盘与清理" />
+                                        <TextBlock Margin="0,4,0,0" Style="{StaticResource CaptionStyle}" Text="存储感知、能耗报告、电池报告和维护入口。" />
+                                    </StackPanel>
+                                    <Path Grid.Column="2" Width="8" Height="13" Margin="16,0,2,0" VerticalAlignment="Center" Data="M 1 1 L 7 6.5 L 1 12" Stroke="{DynamicResource TextFillColorSecondaryBrush}" StrokeEndLineCap="Round" StrokeStartLineCap="Round" StrokeThickness="1.6" Stretch="None" />
+                                </Grid>
+                            </Button>
+
+                            <Border Style="{StaticResource DividerStyle}" />
+
+                            <Button Style="{StaticResource SettingRowButtonStyle}" Command="{Binding OpenNetworkCommand}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border Width="34" Height="34" Margin="0,0,12,0" CornerRadius="9" Background="{DynamicResource AppSuccessSoftBrush}">
+                                        <ui:SymbolIcon Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{DynamicResource AppSuccessBrush}" Symbol="Globe24" />
+                                    </Border>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock FontSize="14" FontWeight="SemiBold" Text="网络与 DNS" />
+                                        <TextBlock Margin="0,4,0,0" Style="{StaticResource CaptionStyle}" Text="查看适配器、IPv4、DNS、DHCP、网关和连接状态。" />
+                                    </StackPanel>
+                                    <Path Grid.Column="2" Width="8" Height="13" Margin="16,0,2,0" VerticalAlignment="Center" Data="M 1 1 L 7 6.5 L 1 12" Stroke="{DynamicResource TextFillColorSecondaryBrush}" StrokeEndLineCap="Round" StrokeStartLineCap="Round" StrokeThickness="1.6" Stretch="None" />
+                                </Grid>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>

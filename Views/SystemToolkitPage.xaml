@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="164" />
+            <RowDefinition Height="0.34*" MinHeight="140" MaxHeight="190" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Margin="0,0,0,14">
@@ -27,14 +27,18 @@
                 <TextBlock Margin="0,5,0,0" Style="{StaticResource AppPageTitleTextStyle}" Text="{Binding Title}" />
                 <TextBlock Margin="0,7,0,0" Style="{StaticResource AppBodyTextStyle}" Text="{Binding Description}" />
             </StackPanel>
-            <ui:Button Grid.Column="1" Width="124" Height="36" Margin="18,0,0,0" VerticalAlignment="Center" Appearance="Secondary" Command="{Binding RefreshStatusCommand}" Content="刷新状态" />
+            <ui:Button Grid.Column="1" Width="124" Height="36" Margin="18,0,0,0" VerticalAlignment="Center" Appearance="Secondary" Command="{Binding RefreshStatusCommand}" Content="刷新状态">
+                <ui:Button.Icon>
+                    <ui:SymbolIcon Symbol="ArrowClockwise24" />
+                </ui:Button.Icon>
+            </ui:Button>
         </Grid>
 
         <Border Grid.Row="1"
                 Margin="0,0,0,14"
                 Padding="14"
                 CornerRadius="8"
-                Background="{DynamicResource AppSurfaceElevatedBrush}"
+                Background="{DynamicResource GlassPanelElevatedBrush}"
                 BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
@@ -62,7 +66,7 @@
                     Margin="0,0,7,0"
                     Padding="14"
                     CornerRadius="8"
-                    Background="{DynamicResource AppSurfaceBrush}"
+                    Background="{DynamicResource GlassPanelBrush}"
                     BorderBrush="{DynamicResource AppStrokeBrush}"
                     BorderThickness="1">
                 <StackPanel>
@@ -85,7 +89,11 @@
                     <WrapPanel Margin="0,8,0,0">
                         <ui:Button Width="112" Margin="0,0,8,8" Appearance="Primary" Command="{Binding EnableSandboxCommand}" Content="启用" />
                         <ui:Button Width="112" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding DisableSandboxCommand}" Content="禁用" />
-                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenOptionalFeaturesCommand}" Content="打开功能管理器" />
+                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenOptionalFeaturesCommand}" Content="打开功能管理器">
+                            <ui:Button.Icon>
+                                <ui:SymbolIcon Symbol="Settings24" />
+                            </ui:Button.Icon>
+                        </ui:Button>
                     </WrapPanel>
                 </StackPanel>
             </Border>
@@ -94,7 +102,7 @@
                     Margin="7,0,0,0"
                     Padding="14"
                     CornerRadius="8"
-                    Background="{DynamicResource AppSurfaceBrush}"
+                    Background="{DynamicResource GlassPanelBrush}"
                     BorderBrush="{DynamicResource AppStrokeBrush}"
                     BorderThickness="1">
                 <StackPanel>
@@ -103,16 +111,40 @@
 
                     <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="设置入口" />
                     <WrapPanel Margin="0,8,0,12">
-                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenDnsSettingsCommand}" Content="DNS 高级设置" />
-                        <ui:Button Width="160" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenDeliveryOptimizationCommand}" Content="传递优化设置" />
-                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenStorageSenseCommand}" Content="存储感知" />
+                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenDnsSettingsCommand}" Content="DNS 高级设置">
+                            <ui:Button.Icon>
+                                <ui:SymbolIcon Symbol="Globe24" />
+                            </ui:Button.Icon>
+                        </ui:Button>
+                        <ui:Button Width="160" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenDeliveryOptimizationCommand}" Content="传递优化设置">
+                            <ui:Button.Icon>
+                                <ui:SymbolIcon Symbol="Rocket24" />
+                            </ui:Button.Icon>
+                        </ui:Button>
+                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenStorageSenseCommand}" Content="存储感知">
+                            <ui:Button.Icon>
+                                <ui:SymbolIcon Symbol="Delete24" />
+                            </ui:Button.Icon>
+                        </ui:Button>
                     </WrapPanel>
 
                     <TextBlock Style="{StaticResource AppSmallLabelTextStyle}" Text="诊断报告" />
                     <WrapPanel Margin="0,8,0,0">
-                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding QueryStartupProgramsCommand}" Content="扫描启动项" />
-                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding GenerateEnergyReportCommand}" Content="能耗报告" />
-                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding GenerateBatteryReportCommand}" Content="电池报告" />
+                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding QueryStartupProgramsCommand}" Content="扫描启动项">
+                            <ui:Button.Icon>
+                                <ui:SymbolIcon Symbol="Rocket24" />
+                            </ui:Button.Icon>
+                        </ui:Button>
+                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding GenerateEnergyReportCommand}" Content="能耗报告">
+                            <ui:Button.Icon>
+                                <ui:SymbolIcon Symbol="Desktop24" />
+                            </ui:Button.Icon>
+                        </ui:Button>
+                        <ui:Button Width="150" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding GenerateBatteryReportCommand}" Content="电池报告">
+                            <ui:Button.Icon>
+                                <ui:SymbolIcon Symbol="Desktop24" />
+                            </ui:Button.Icon>
+                        </ui:Button>
                     </WrapPanel>
                 </StackPanel>
             </Border>
@@ -122,7 +154,7 @@
                 Margin="0,14,0,0"
                 Padding="12"
                 CornerRadius="8"
-                Background="{DynamicResource AppSurfaceBrush}"
+                Background="{DynamicResource GlassPanelBrush}"
                 BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
@@ -136,7 +168,6 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="执行日志" />
-                    <ui:Button Grid.Column="1" Width="104" Height="32" Appearance="Secondary" Command="{Binding BackToHomeCommand}" Content="返回首页" />
                 </Grid>
                 <TextBox Grid.Row="1" Style="{StaticResource AppLogTextBoxStyle}" Text="{Binding ExecutionLog, Mode=OneWay}" />
             </Grid>

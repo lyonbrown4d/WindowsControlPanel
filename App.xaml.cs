@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Text;
 using System.Windows;
 using Microsoft.EntityFrameworkCore;
@@ -21,9 +21,6 @@ public partial class App : PrismApplication
     {
         base.OnInitialized();
         var logger = Container.Resolve<Serilog.ILogger>();
-        var themeSettingsService = Container.Resolve<IThemeSettingsService>();
-        var themePreference = themeSettingsService.GetThemePreferenceAsync().GetAwaiter().GetResult();
-        themeSettingsService.ApplyTheme(themePreference, Current.MainWindow);
         var regionManager = Container.Resolve<IRegionManager>();
         logger.Information("Application initialized. Navigating ContentRegion -> Dashboard.");
         regionManager.RequestNavigate("ContentRegion", "Dashboard", result =>
@@ -40,6 +37,40 @@ public partial class App : PrismApplication
                 result.Success
             );
         });
+    }
+
+    protected override void InitializeShell(Window shell)
+    {
+        Current.MainWindow = shell;
+
+        var logger = Container.Resolve<Serilog.ILogger>();
+        var themeSettingsService = Container.Resolve<IThemeSettingsService>();
+        var themePreference = themeSettingsService.GetThemePreferenceAsync().GetAwaiter().GetResult();
+        themeSettingsService.ApplyTheme(themePreference, shell);
+
+        if (shell.WindowState == WindowState.Minimized)
+        {
+            shell.WindowState = WindowState.Normal;
+        }
+
+        base.InitializeShell(shell);
+
+        shell.Dispatcher.BeginInvoke(new Action(() =>
+        {
+            if (!shell.IsVisible)
+            {
+                logger.Warning("Shell was not visible after Prism initialization. Showing it again.");
+                shell.Show();
+            }
+
+            if (shell.WindowState == WindowState.Minimized)
+            {
+                shell.WindowState = WindowState.Normal;
+            }
+
+            shell.Activate();
+            shell.Focus();
+        }));
     }
 
     protected override void RegisterTypes(IContainerRegistry containerRegistry)

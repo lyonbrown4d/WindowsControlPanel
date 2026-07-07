@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="154" />
+            <RowDefinition Height="0.32*" MinHeight="132" MaxHeight="180" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Margin="0,0,0,14">
@@ -30,8 +30,16 @@
                            Text="读取当前网络适配器的 IPv4、DNS、DHCP 与网关状态，适合快速排查网络配置。" />
             </StackPanel>
             <WrapPanel Grid.Column="1" Margin="18,0,0,0" VerticalAlignment="Center">
-                <ui:Button Width="112" Height="36" Margin="0,0,8,0" Appearance="Primary" Command="{Binding RefreshCommand}" Content="刷新状态" />
-                <ui:Button Width="136" Height="36" Appearance="Secondary" Command="{Binding OpenDnsSettingsCommand}" Content="DNS 设置" />
+                <ui:Button Width="112" Height="36" Margin="0,0,8,0" Appearance="Primary" Command="{Binding RefreshCommand}" Content="刷新状态">
+                    <ui:Button.Icon>
+                        <ui:SymbolIcon Symbol="ArrowClockwise24" />
+                    </ui:Button.Icon>
+                </ui:Button>
+                <ui:Button Width="136" Height="36" Appearance="Secondary" Command="{Binding OpenDnsSettingsCommand}" Content="DNS 设置">
+                    <ui:Button.Icon>
+                        <ui:SymbolIcon Symbol="Globe24" />
+                    </ui:Button.Icon>
+                </ui:Button>
             </WrapPanel>
         </Grid>
 
@@ -39,7 +47,7 @@
                 Margin="0,0,0,14"
                 Padding="14"
                 CornerRadius="8"
-                Background="{DynamicResource AppSurfaceElevatedBrush}"
+                Background="{DynamicResource GlassPanelElevatedBrush}"
                 BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
@@ -77,7 +85,7 @@
             <Border Grid.Column="0"
                     Padding="12"
                     CornerRadius="8"
-                    Background="{DynamicResource AppSurfaceBrush}"
+                    Background="{DynamicResource GlassPanelBrush}"
                     BorderBrush="{DynamicResource AppStrokeBrush}"
                     BorderThickness="1">
                 <Grid>
@@ -118,7 +126,7 @@
                                             </Border>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppSurfaceElevatedBrush}" />
+                                                    <Setter TargetName="Root" Property="Background" Value="{DynamicResource GlassPanelElevatedBrush}" />
                                                 </Trigger>
                                                 <Trigger Property="IsSelected" Value="True">
                                                     <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppAccentSoftBrush}" />
@@ -146,7 +154,7 @@
                     Margin="14,0,0,0"
                     Padding="12"
                     CornerRadius="8"
-                    Background="{DynamicResource AppSurfaceBrush}"
+                    Background="{DynamicResource GlassPanelBrush}"
                     BorderBrush="{DynamicResource AppStrokeBrush}"
                     BorderThickness="1">
                 <Grid>
@@ -173,7 +181,7 @@
                 Margin="0,14,0,0"
                 Padding="12"
                 CornerRadius="8"
-                Background="{DynamicResource AppSurfaceBrush}"
+                Background="{DynamicResource GlassPanelBrush}"
                 BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
@@ -187,7 +195,6 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="日志与提示" />
-                    <ui:Button Grid.Column="1" Width="104" Height="32" Appearance="Secondary" Command="{Binding BackToHomeCommand}" Content="返回首页" />
                 </Grid>
                 <TextBox Grid.Row="1"
                          Style="{StaticResource AppLogTextBoxStyle}"

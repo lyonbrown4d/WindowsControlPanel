@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="164" />
+            <RowDefinition Height="0.34*" MinHeight="140" MaxHeight="190" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Margin="0,0,0,14">
@@ -47,7 +47,7 @@
                 Margin="0,0,0,14"
                 Padding="14"
                 CornerRadius="8"
-                Background="{DynamicResource AppSurfaceElevatedBrush}"
+                Background="{DynamicResource GlassPanelElevatedBrush}"
                 BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
@@ -82,7 +82,7 @@
         <Border Grid.Row="2"
                 Padding="12"
                 CornerRadius="8"
-                Background="{DynamicResource AppSurfaceBrush}"
+                Background="{DynamicResource GlassPanelBrush}"
                 BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
@@ -101,7 +101,7 @@
                         <Border Margin="10,1,0,0"
                                 Padding="8,3"
                                 CornerRadius="10"
-                                Background="{DynamicResource AppSurfaceElevatedBrush}"
+                                Background="{DynamicResource GlassPanelElevatedBrush}"
                                 BorderBrush="{DynamicResource AppStrokeBrush}"
                                 BorderThickness="1">
                             <TextBlock FontSize="11"
@@ -144,7 +144,7 @@
                 Margin="0,14,0,0"
                 Padding="12"
                 CornerRadius="8"
-                Background="{DynamicResource AppSurfaceBrush}"
+                Background="{DynamicResource GlassPanelBrush}"
                 BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
@@ -158,7 +158,6 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="日志与提示" />
-                    <ui:Button Grid.Column="1" Width="104" Height="32" Appearance="Secondary" Command="{Binding BackToHomeCommand}" Content="返回首页" />
                 </Grid>
                 <TextBox Grid.Row="1"
                          Style="{StaticResource AppLogTextBoxStyle}"

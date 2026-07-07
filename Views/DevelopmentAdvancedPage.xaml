@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="164" />
+            <RowDefinition Height="0.34*" MinHeight="140" MaxHeight="190" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Margin="0,0,0,14">
@@ -27,14 +27,18 @@
                 <TextBlock Margin="0,5,0,0" Style="{StaticResource AppPageTitleTextStyle}" Text="开发高级工具" />
                 <TextBlock Margin="0,7,0,0" Style="{StaticResource AppBodyTextStyle}" Text="封装开发者模式、Windows Sudo、包清单导出等深层动作。" />
             </StackPanel>
-            <ui:Button Grid.Column="1" Width="124" Height="36" Margin="18,0,0,0" VerticalAlignment="Center" Appearance="Secondary" Command="{Binding RefreshStatusCommand}" Content="刷新状态" />
+            <ui:Button Grid.Column="1" Width="124" Height="36" Margin="18,0,0,0" VerticalAlignment="Center" Appearance="Secondary" Command="{Binding RefreshStatusCommand}" Content="刷新状态">
+                <ui:Button.Icon>
+                    <ui:SymbolIcon Symbol="ArrowClockwise24" />
+                </ui:Button.Icon>
+            </ui:Button>
         </Grid>
 
         <Border Grid.Row="1"
                 Margin="0,0,0,14"
                 Padding="14"
                 CornerRadius="8"
-                Background="{DynamicResource AppSurfaceElevatedBrush}"
+                Background="{DynamicResource GlassPanelElevatedBrush}"
                 BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
@@ -62,7 +66,7 @@
                     Margin="0,0,7,0"
                     Padding="14"
                     CornerRadius="8"
-                    Background="{DynamicResource AppSurfaceBrush}"
+                    Background="{DynamicResource GlassPanelBrush}"
                     BorderBrush="{DynamicResource AppStrokeBrush}"
                     BorderThickness="1">
                 <StackPanel>
@@ -87,7 +91,7 @@
                     Margin="7,0,0,0"
                     Padding="14"
                     CornerRadius="8"
-                    Background="{DynamicResource AppSurfaceBrush}"
+                    Background="{DynamicResource GlassPanelBrush}"
                     BorderBrush="{DynamicResource AppStrokeBrush}"
                     BorderThickness="1">
                 <Grid>
@@ -104,7 +108,7 @@
                             Margin="0,14,0,14"
                             Padding="12"
                             CornerRadius="8"
-                            Background="{DynamicResource AppSurfaceElevatedBrush}"
+                            Background="{DynamicResource GlassPanelElevatedBrush}"
                             BorderBrush="{DynamicResource AppStrokeBrush}"
                             BorderThickness="1">
                         <StackPanel>
@@ -112,7 +116,11 @@
                             <TextBlock Margin="0,6,0,0" Style="{StaticResource AppBodyTextStyle}" Text="当前用户安装的 winget 软件包、来源和版本信息。" />
                         </StackPanel>
                     </Border>
-                    <ui:Button Grid.Row="2" Width="170" HorizontalAlignment="Left" Appearance="Secondary" Command="{Binding ExportWingetCommand}" Content="导出 winget 清单" />
+                    <ui:Button Grid.Row="2" Width="170" HorizontalAlignment="Left" Appearance="Secondary" Command="{Binding ExportWingetCommand}" Content="导出 winget 清单">
+                        <ui:Button.Icon>
+                            <ui:SymbolIcon Symbol="Settings24" />
+                        </ui:Button.Icon>
+                    </ui:Button>
                 </Grid>
             </Border>
         </Grid>
@@ -121,7 +129,7 @@
                 Margin="0,14,0,0"
                 Padding="12"
                 CornerRadius="8"
-                Background="{DynamicResource AppSurfaceBrush}"
+                Background="{DynamicResource GlassPanelBrush}"
                 BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
@@ -135,7 +143,6 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="执行日志" />
-                    <ui:Button Grid.Column="1" Width="104" Height="32" Appearance="Secondary" Command="{Binding BackToHomeCommand}" Content="返回首页" />
                 </Grid>
                 <TextBox Grid.Row="1" Style="{StaticResource AppLogTextBoxStyle}" Text="{Binding ExecutionLog, Mode=OneWay}" />
             </Grid>

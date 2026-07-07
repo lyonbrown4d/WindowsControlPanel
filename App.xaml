@@ -13,15 +13,15 @@
             </ResourceDictionary.MergedDictionaries>
 
             <FontFamily x:Key="AppFontFamily">Segoe UI Variable</FontFamily>
-            <SolidColorBrush x:Key="AppBackgroundBrush" Color="#330B0F14" />
-            <SolidColorBrush x:Key="AppSurfaceBrush" Color="#A6111820" />
-            <SolidColorBrush x:Key="AppSurfaceElevatedBrush" Color="#CC17212B" />
-            <SolidColorBrush x:Key="AppSurfaceSubtleBrush" Color="#8C0F151C" />
+            <SolidColorBrush x:Key="AppBackgroundBrush" Color="#220B0F14" />
+            <SolidColorBrush x:Key="AppSurfaceBrush" Color="#80111820" />
+            <SolidColorBrush x:Key="AppSurfaceElevatedBrush" Color="#B817212B" />
+            <SolidColorBrush x:Key="AppSurfaceSubtleBrush" Color="#660F151C" />
             <SolidColorBrush x:Key="AppStrokeBrush" Color="#55FFFFFF" />
             <SolidColorBrush x:Key="AppStrokeStrongBrush" Color="#78FFFFFF" />
-            <SolidColorBrush x:Key="AppAccentBrush" Color="#4F9CF9" />
-            <SolidColorBrush x:Key="AppAccentSoftBrush" Color="#244F9CF9" />
-            <SolidColorBrush x:Key="AppAccentHoverBrush" Color="#65B3FF" />
+            <SolidColorBrush x:Key="AppAccentBrush" Color="#60A5FA" />
+            <SolidColorBrush x:Key="AppAccentSoftBrush" Color="#2A60A5FA" />
+            <SolidColorBrush x:Key="AppAccentHoverBrush" Color="#93C5FD" />
             <SolidColorBrush x:Key="AppButtonHoverBrush" Color="#22FFFFFF" />
             <SolidColorBrush x:Key="AppButtonPressedBrush" Color="#334F9CF9" />
             <SolidColorBrush x:Key="AppDangerSoftBrush" Color="#30EF4444" />
@@ -30,20 +30,20 @@
             <SolidColorBrush x:Key="AppWarningBrush" Color="#F59E0B" />
             <SolidColorBrush x:Key="AppDangerBrush" Color="#EF4444" />
 
-            <SolidColorBrush x:Key="GlassShellBrush" Color="#8F0B0F14" />
-            <SolidColorBrush x:Key="GlassPanelBrush" Color="#A8111820" />
-            <SolidColorBrush x:Key="GlassPanelElevatedBrush" Color="#C817212B" />
-            <SolidColorBrush x:Key="GlassSidebarBrush" Color="#9C0F151C" />
+            <SolidColorBrush x:Key="GlassShellBrush" Color="#730B0F14" />
+            <SolidColorBrush x:Key="GlassPanelBrush" Color="#86111820" />
+            <SolidColorBrush x:Key="GlassPanelElevatedBrush" Color="#B817212B" />
+            <SolidColorBrush x:Key="GlassSidebarBrush" Color="#820F151C" />
             <SolidColorBrush x:Key="GlassInputBrush" Color="#BA0D131A" />
             <SolidColorBrush x:Key="GlassStrokeBrush" Color="#55FFFFFF" />
             <SolidColorBrush x:Key="GlassStrokeStrongBrush" Color="#78FFFFFF" />
 
-            <SolidColorBrush x:Key="GlassAmbientBrush" Color="#260B0F14" />
+            <SolidColorBrush x:Key="GlassAmbientBrush" Color="#1C0B0F14" />
             <SolidColorBrush x:Key="GlassHighlightBrush" Color="#26FFFFFF" />
             <LinearGradientBrush x:Key="HeroSurfaceBrush" StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#C817212B" Offset="0" />
-                <GradientStop Color="#A8111820" Offset="0.72" />
-                <GradientStop Color="#8C0F151C" Offset="1" />
+                <GradientStop Color="#B817212B" Offset="0" />
+                <GradientStop Color="#86111820" Offset="0.72" />
+                <GradientStop Color="#660F151C" Offset="1" />
             </LinearGradientBrush>
 
             <Thickness x:Key="AppPageMargin">18</Thickness>
@@ -189,6 +189,9 @@
                     </Trigger>
                     <Trigger Property="IsPressed" Value="True">
                         <Setter Property="Background" Value="{DynamicResource AppButtonPressedBrush}" />
+                        <Setter Property="BorderBrush" Value="{DynamicResource AppAccentBrush}" />
+                    </Trigger>
+                    <Trigger Property="IsKeyboardFocused" Value="True">
                         <Setter Property="BorderBrush" Value="{DynamicResource AppAccentBrush}" />
                     </Trigger>
                     <Trigger Property="Appearance" Value="Primary">
@@ -365,6 +368,64 @@
                 <Setter Property="FontFamily" Value="{StaticResource AppFontFamily}" />
                 <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
                 <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type CheckBox}">
+                            <Grid SnapsToDevicePixels="True">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border x:Name="Box"
+                                        Width="18"
+                                        Height="18"
+                                        VerticalAlignment="Center"
+                                        Background="{DynamicResource GlassInputBrush}"
+                                        BorderBrush="{DynamicResource AppStrokeBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="5">
+                                    <Path x:Name="CheckMark"
+                                          Width="10"
+                                          Height="8"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Data="M 1,4 L 4,7 L 9,1"
+                                          Stroke="White"
+                                          StrokeEndLineCap="Round"
+                                          StrokeStartLineCap="Round"
+                                          StrokeThickness="1.7"
+                                          Visibility="Collapsed" />
+                                </Border>
+                                <ContentPresenter Grid.Column="1"
+                                                  Margin="9,0,0,0"
+                                                  VerticalAlignment="Center"
+                                                  Content="{TemplateBinding Content}"
+                                                  ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  RecognizesAccessKey="True" />
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource AppStrokeStrongBrush}" />
+                                    <Setter TargetName="Box" Property="Background" Value="{DynamicResource AppButtonHoverBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource AppAccentBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="Box" Property="Background" Value="{DynamicResource AppAccentBrush}" />
+                                    <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource AppAccentBrush}" />
+                                    <Setter TargetName="CheckMark" Property="Visibility" Value="Visible" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}" />
+                                    <Setter TargetName="Box" Property="Opacity" Value="0.62" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
             </Style>
             <Style TargetType="ui:Card">
                 <Setter Property="Background" Value="{DynamicResource GlassPanelElevatedBrush}" />
@@ -450,7 +511,7 @@
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="Root" Property="Background" Value="{DynamicResource AppSurfaceElevatedBrush}" />
+                                    <Setter TargetName="Root" Property="Background" Value="{DynamicResource GlassPanelElevatedBrush}" />
                                     <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource AppStrokeBrush}" />
                                 </Trigger>
                                 <Trigger Property="IsSelected" Value="True">

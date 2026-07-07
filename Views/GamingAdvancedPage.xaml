@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="164" />
+            <RowDefinition Height="0.34*" MinHeight="140" MaxHeight="190" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Margin="0,0,0,14">
@@ -27,14 +27,18 @@
                 <TextBlock Margin="0,5,0,0" Style="{StaticResource AppPageTitleTextStyle}" Text="游戏高级工具" />
                 <TextBlock Margin="0,7,0,0" Style="{StaticResource AppBodyTextStyle}" Text="整合游戏相关深层设置，并提供一键性能模式。" />
             </StackPanel>
-            <ui:Button Grid.Column="1" Width="124" Height="36" Margin="18,0,0,0" VerticalAlignment="Center" Appearance="Secondary" Command="{Binding RefreshStatusCommand}" Content="刷新状态" />
+            <ui:Button Grid.Column="1" Width="124" Height="36" Margin="18,0,0,0" VerticalAlignment="Center" Appearance="Secondary" Command="{Binding RefreshStatusCommand}" Content="刷新状态">
+                <ui:Button.Icon>
+                    <ui:SymbolIcon Symbol="ArrowClockwise24" />
+                </ui:Button.Icon>
+            </ui:Button>
         </Grid>
 
         <Border Grid.Row="1"
                 Margin="0,0,0,14"
                 Padding="14"
                 CornerRadius="8"
-                Background="{DynamicResource AppSurfaceElevatedBrush}"
+                Background="{DynamicResource GlassPanelElevatedBrush}"
                 BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
@@ -62,7 +66,7 @@
                     Margin="0,0,7,0"
                     Padding="14"
                     CornerRadius="8"
-                    Background="{DynamicResource AppSurfaceBrush}"
+                    Background="{DynamicResource GlassPanelBrush}"
                     BorderBrush="{DynamicResource AppStrokeBrush}"
                     BorderThickness="1">
                 <Grid>
@@ -87,7 +91,11 @@
                             <TextBlock Margin="0,6,0,0" Style="{StaticResource AppBodyTextStyle}" Text="该操作可能影响虚拟化、容器和安全特性，执行前会出现确认提示。" />
                         </StackPanel>
                     </Border>
-                    <ui:Button Grid.Row="2" Width="150" HorizontalAlignment="Left" Appearance="Danger" Command="{Binding ApplyGamingModeCommand}" Content="应用游戏模式" />
+                    <ui:Button Grid.Row="2" Width="150" HorizontalAlignment="Left" Appearance="Danger" Command="{Binding ApplyGamingModeCommand}" Content="应用游戏模式">
+                        <ui:Button.Icon>
+                            <ui:SymbolIcon Symbol="Games24" />
+                        </ui:Button.Icon>
+                    </ui:Button>
                 </Grid>
             </Border>
 
@@ -95,7 +103,7 @@
                     Margin="7,0,0,0"
                     Padding="14"
                     CornerRadius="8"
-                    Background="{DynamicResource AppSurfaceBrush}"
+                    Background="{DynamicResource GlassPanelBrush}"
                     BorderBrush="{DynamicResource AppStrokeBrush}"
                     BorderThickness="1">
                 <StackPanel>
@@ -103,9 +111,21 @@
                     <TextBlock Margin="0,6,0,14" Style="{StaticResource AppBodyTextStyle}" Text="快速进入 Windows 深层图形、游戏模式和游戏栏设置页面。" />
 
                     <WrapPanel>
-                        <ui:Button Width="170" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenGraphicsSettingsCommand}" Content="打开图形设置" />
-                        <ui:Button Width="170" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenGameModeSettingsCommand}" Content="打开游戏模式设置" />
-                        <ui:Button Width="170" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenGameBarSettingsCommand}" Content="打开游戏栏设置" />
+                        <ui:Button Width="170" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenGraphicsSettingsCommand}" Content="打开图形设置">
+                            <ui:Button.Icon>
+                                <ui:SymbolIcon Symbol="Desktop24" />
+                            </ui:Button.Icon>
+                        </ui:Button>
+                        <ui:Button Width="170" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenGameModeSettingsCommand}" Content="打开游戏模式设置">
+                            <ui:Button.Icon>
+                                <ui:SymbolIcon Symbol="Games24" />
+                            </ui:Button.Icon>
+                        </ui:Button>
+                        <ui:Button Width="170" Margin="0,0,8,8" Appearance="Secondary" Command="{Binding OpenGameBarSettingsCommand}" Content="打开游戏栏设置">
+                            <ui:Button.Icon>
+                                <ui:SymbolIcon Symbol="Settings24" />
+                            </ui:Button.Icon>
+                        </ui:Button>
                     </WrapPanel>
                 </StackPanel>
             </Border>
@@ -115,7 +135,7 @@
                 Margin="0,14,0,0"
                 Padding="12"
                 CornerRadius="8"
-                Background="{DynamicResource AppSurfaceBrush}"
+                Background="{DynamicResource GlassPanelBrush}"
                 BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
@@ -129,7 +149,6 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Style="{StaticResource AppSectionTitleTextStyle}" Text="执行日志" />
-                    <ui:Button Grid.Column="1" Width="104" Height="32" Appearance="Secondary" Command="{Binding BackToHomeCommand}" Content="返回首页" />
                 </Grid>
                 <TextBox Grid.Row="1" Style="{StaticResource AppLogTextBoxStyle}" Text="{Binding ExecutionLog, Mode=OneWay}" />
             </Grid>

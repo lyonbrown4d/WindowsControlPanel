@@ -12,7 +12,7 @@
     <Grid Margin="{StaticResource AppPageMargin}">
         <Border Padding="18"
                 CornerRadius="8"
-                Background="{DynamicResource AppSurfaceBrush}"
+                Background="{DynamicResource GlassPanelBrush}"
                 BorderBrush="{DynamicResource AppStrokeBrush}"
                 BorderThickness="1">
             <Grid>
@@ -32,7 +32,7 @@
                         Padding="16"
                         VerticalAlignment="Top"
                         CornerRadius="8"
-                        Background="{DynamicResource AppSurfaceElevatedBrush}"
+                        Background="{DynamicResource GlassPanelElevatedBrush}"
                         BorderBrush="{DynamicResource AppStrokeBrush}"
                         BorderThickness="1">
                     <Grid>
